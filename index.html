@@ -299,6 +299,23 @@
       display: none;
     }
 
+    #buzz-lock.just-buzzed {
+      animation: buzz-alert 0.55s ease-out;
+    }
+
+    @keyframes buzz-alert {
+      0% { box-shadow: 0 0 0 0 rgba(255, 255, 255, 0.95); }
+      40% { box-shadow: 0 0 0 10px rgba(255, 255, 255, 0); }
+      55% { box-shadow: 0 0 0 0 rgba(255, 255, 255, 0.9); }
+      100% { box-shadow: 0 0 0 14px rgba(255, 255, 255, 0); }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      #buzz-lock.just-buzzed {
+        animation: none;
+      }
+    }
+
     #buzz-lock.can-reopen {
       cursor: pointer;
     }
@@ -424,6 +441,7 @@
     #menu-toggle,
     #judge-open,
     #sound,
+    #buzzer,
     #music-link,
     #credits-open,
     #credits-close {
@@ -487,6 +505,7 @@
 
     #judge-open,
     #sound,
+    #buzzer,
     #music-link,
     #credits-open {
       width: 100%;
@@ -499,6 +518,10 @@
 
     #judge-open {
       margin-bottom: 8px;
+    }
+
+    #buzzer {
+      margin-top: 8px;
     }
 
     #music-link {
@@ -557,7 +580,9 @@
     #judge-open:hover,
     #judge-open:focus-visible,
     #sound:hover,
-    #sound:focus-visible {
+    #sound:focus-visible,
+    #buzzer:hover,
+    #buzzer:focus-visible {
       background: var(--gold);
       color: #111;
     }
@@ -1090,6 +1115,7 @@
     <div id="menu-panel" hidden>
       <button id="judge-open" type="button" hidden>Judge window</button>
       <button id="sound" type="button" aria-pressed="true">Music on</button>
+      <button id="buzzer" type="button" aria-pressed="true">Buzzer on</button>
       <a id="music-link" href="https://archive.org/details/tvtunes_29826" target="_blank" rel="noopener noreferrer" hidden>Think music</a>
       <div class="menu-section">
         <button id="credits-open" type="button">Credits</button>
@@ -1219,6 +1245,7 @@
       const menuToggle = document.getElementById("menu-toggle");
       const menuPanel = document.getElementById("menu-panel");
       const soundBtn = document.getElementById("sound");
+      const buzzerBtn = document.getElementById("buzzer");
       const addSection = document.getElementById("add-section");
       const addTeamsEl = document.getElementById("add-teams");
       const removeSection = document.getElementById("remove-section");
@@ -1271,6 +1298,8 @@
       let roomCode = "";
       let roomToken = "";
       let buzzWinner = null;
+      let buzzSnapshotSeen = false;
+      let buzzAudio = null;
       let roomState = null;
       let clockTimer = null;
       let lastActionId = "";
@@ -1285,6 +1314,7 @@
       const thinkAudio = new Audio();
       thinkAudio.preload = "auto";
       let muted = loadMuted();
+      let buzzerMuted = loadBuzzerMuted();
       let localTrackMissing = false;
       const trackReady = chooseThinkTrack();
 
@@ -1312,6 +1342,7 @@
       titleEl.textContent = game.title;
       document.title = game.title;
       updateSoundButtons();
+      updateBuzzerButton();
       renderTeamMenu();
       renderAll();
       connectRoom();
@@ -1377,6 +1408,7 @@
       });
 
       soundBtn.addEventListener("click", toggleSound);
+      buzzerBtn.addEventListener("click", toggleBuzzer);
       judgeOpen.addEventListener("click", function () {
         if (!roomCode || !roomToken) {
           return;
@@ -1407,6 +1439,9 @@
         event.preventDefault();
         event.stopPropagation();
       }, true);
+
+      document.addEventListener("pointerdown", unlockBuzzAudio);
+      document.addEventListener("keydown", unlockBuzzAudio);
 
       window.addEventListener("resize", function () {
         fitOverlayType();
@@ -2625,6 +2660,35 @@
         }
       }
 
+      function toggleBuzzer() {
+        buzzerMuted = !buzzerMuted;
+        saveBuzzerMuted();
+        updateBuzzerButton();
+      }
+
+      function updateBuzzerButton() {
+        const label = buzzerMuted ? "Buzzer off" : "Buzzer on";
+        const pressed = buzzerMuted ? "false" : "true";
+        buzzerBtn.textContent = label;
+        buzzerBtn.setAttribute("aria-pressed", pressed);
+      }
+
+      function loadBuzzerMuted() {
+        try {
+          return window.localStorage.getItem("jeopardy-buzzer") === "off";
+        } catch (error) {
+          return false;
+        }
+      }
+
+      function saveBuzzerMuted() {
+        try {
+          window.localStorage.setItem("jeopardy-buzzer", buzzerMuted ? "off" : "on");
+        } catch (error) {
+          // Ignore storage errors so the game still works.
+        }
+      }
+
       function chooseThinkTrack() {
         if (location.protocol === "file:") {
           thinkAudio.src = LOCAL_TRACK;
@@ -3124,6 +3188,87 @@
         }, 200);
       }
 
+      function buzzAudioContext() {
+        if (buzzAudio) {
+          return buzzAudio;
+        }
+        const Context = window.AudioContext || window.webkitAudioContext;
+        if (!Context) {
+          return null;
+        }
+        buzzAudio = new Context();
+        return buzzAudio;
+      }
+
+      function unlockBuzzAudio() {
+        const ctx = buzzAudioContext();
+        if (!ctx || ctx.state !== "suspended") {
+          return;
+        }
+        const pending = ctx.resume();
+        if (pending && typeof pending.catch === "function") {
+          pending.catch(function () {
+            // The browser can block sound until the next click. The banner still updates.
+          });
+        }
+      }
+
+      function scheduleBuzz(ctx, start, duration) {
+        const master = ctx.createGain();
+        master.connect(ctx.destination);
+        master.gain.setValueAtTime(0.0001, start);
+        master.gain.exponentialRampToValueAtTime(0.42, start + 0.012);
+        master.gain.exponentialRampToValueAtTime(0.0001, start + duration);
+
+        const low = ctx.createOscillator();
+        low.type = "square";
+        low.frequency.setValueAtTime(196, start);
+        low.frequency.exponentialRampToValueAtTime(110, start + duration);
+        low.connect(master);
+
+        const high = ctx.createOscillator();
+        high.type = "sawtooth";
+        high.frequency.setValueAtTime(247, start);
+        high.frequency.exponentialRampToValueAtTime(150, start + duration);
+        const highGain = ctx.createGain();
+        highGain.gain.value = 0.4;
+        high.connect(highGain);
+        highGain.connect(master);
+
+        const stopAt = start + duration + 0.02;
+        low.start(start);
+        high.start(start);
+        low.stop(stopAt);
+        high.stop(stopAt);
+        window.setTimeout(function () {
+          try {
+            master.disconnect();
+          } catch (error) {
+            // The node is already gone if the page navigated away.
+          }
+        }, Math.max(0, (stopAt - ctx.currentTime) * 1000) + 60);
+      }
+
+      function playBuzzAlert() {
+        if (buzzerMuted) {
+          return;
+        }
+        const ctx = buzzAudioContext();
+        if (!ctx) {
+          return;
+        }
+        unlockBuzzAudio();
+        const now = ctx.currentTime;
+        scheduleBuzz(ctx, now, 0.16);
+        scheduleBuzz(ctx, now + 0.21, 0.22);
+      }
+
+      function pulseBuzzLock(banner) {
+        banner.classList.remove("just-buzzed");
+        void banner.offsetWidth;
+        banner.classList.add("just-buzzed");
+      }
+
       function renderBuzzLock() {
         const state = roomState;
         const banner = document.getElementById("buzz-lock");
@@ -3135,6 +3280,10 @@
         if (!state || !teams.length) {
           banner.hidden = true;
           buzzQr.hidden = true;
+          if (state) {
+            buzzSnapshotSeen = true;
+            buzzWinner = state.winner || null;
+          }
           return;
         }
         const taken = Array.isArray(state.taken) ? state.taken : [];
@@ -3142,12 +3291,14 @@
         const waitingForTeams = teams.some(function (team) {
           return taken.indexOf(team.id) === -1;
         });
+        const alertThisBuzz = buzzSnapshotSeen && !!state.winner && state.winner !== buzzWinner;
         if (state.winner !== buzzWinner) {
           buzzWinner = state.winner;
           if (state.winner) {
             console.log("[Buzz] " + displayColor(state.winner));
           }
         }
+        buzzSnapshotSeen = true;
         if (!state.winner && !state.armed && !taken.length && !out.length) {
           banner.hidden = true;
           buzzQr.hidden = true;
@@ -3173,14 +3324,18 @@
           clock.hidden = left === null;
           clock.textContent = left > 0 ? String(Math.ceil(left)) : "Time";
           note.textContent = "Click or press R to reopen";
+          if (alertThisBuzz) {
+            playBuzzAlert();
+            pulseBuzzLock(banner);
+          }
           ensureClock();
           return;
         }
         clock.hidden = true;
         banner.style.background = "#111";
         banner.style.color = "#ffcc00";
-        title.textContent = state.armed ? "Buzzers open" : "Buzzers";
-        note.textContent = state.armed && !taken.length ? "No buzzers joined yet" : "";
+        title.textContent = state.held ? "Buzzers held" : (state.armed ? "Buzzers open" : "Buzzers");
+        note.textContent = state.held ? "Release on the judge window" : (state.armed && !taken.length ? "No buzzers joined yet" : "");
       }
 
       document.getElementById("buzz-lock").addEventListener("click", function () {

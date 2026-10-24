@@ -197,6 +197,16 @@ export class BuzzRoom extends DurableObject {
         ws.close(1008, "Host rejected");
         return;
       }
+      if (data.type === "hold" || data.type === "release") {
+        const holding = data.type === "hold";
+        if (!!attachment.holding === holding) {
+          return;
+        }
+        attachment.holding = holding;
+        ws.serializeAttachment(attachment);
+        this.broadcast(room);
+        return;
+      }
       this.forwardAction(data);
       return;
     }
@@ -209,7 +219,7 @@ export class BuzzRoom extends DurableObject {
       this.broadcast(room);
       return;
     }
-    if (data.type === "buzz" && attachment.color && room.armed && !room.locked && room.teams.indexOf(attachment.color) !== -1 && room.out.indexOf(attachment.color) === -1) {
+    if (data.type === "buzz" && attachment.color && room.armed && !room.locked && !this.judgeHolding() && room.teams.indexOf(attachment.color) !== -1 && room.out.indexOf(attachment.color) === -1) {
       room.locked = true;
       room.winner = attachment.color;
       room.lockedAt = Date.now();
@@ -414,6 +424,13 @@ export class BuzzRoom extends DurableObject {
     });
   }
 
+  judgeHolding(closingId) {
+    return this.ctx.getWebSockets().some(function (ws) {
+      const attachment = ws.deserializeAttachment() || {};
+      return attachment.role === "judge" && attachment.holding && attachment.id !== closingId;
+    });
+  }
+
   view(room, you, role, closingId) {
     const payload = {
       type: "state",
@@ -421,6 +438,7 @@ export class BuzzRoom extends DurableObject {
       taken: Object.keys(room.taken),
       names: room.names || {},
       armed: !!room.armed,
+      held: this.judgeHolding(closingId),
       locked: !!room.locked,
       winner: room.winner || null,
       lockedAt: room.lockedAt || null,

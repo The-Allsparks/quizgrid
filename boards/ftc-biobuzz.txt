@@ -260,12 +260,11 @@ The playoff runners-up receive this alliance award | What is the Finalist Allian
 Students nominate an adult coach or mentor for this optional award with a video of at most 60 seconds | What is the Compass Award? | Competition Manual §6.5.2, Compass Award | https://ftc-resources.firstinspires.org/ftc/game/cm-html#_Toc205155286
 
 CATEGORY: FIRST Spirit
-This FIRST idea pairs fierce competition with respect and empathy | What is Gracious Professionalism? | Competition Manual §1.3.1, Gracious Professionalism | https://ftc-resources.firstinspires.org/ftc/game/cm-html#_Toc205155235
+This is part of the FIRST ethos and a way of doing things that encourages high-quality work, emphasizes the value of others, and respects individuals and the community. | What is Gracious Professionalism? | Competition Manual §1.3.1, Gracious Professionalism | https://ftc-resources.firstinspires.org/ftc/game/cm-html#_Toc205155235
 This FIRST idea means helping other teams even when you are competing against them | What is Coopertition? | Competition Manual §1.3.2, Coopertition | https://ftc-resources.firstinspires.org/ftc/game/cm-html#_Toc205155236
 He coined the term Gracious Professionalism | Who is Dr. Woodie Flowers? | Competition Manual §1.3.1, Gracious Professionalism | https://ftc-resources.firstinspires.org/ftc/game/cm-html#_Toc205155235
 This three-word FIRST slogan emphasizes the life skills teams gain beyond building machines. | What is More Than Robots? | Competition Manual §1.1, About FIRST | https://ftc-resources.firstinspires.org/ftc/game/cm-html#_Toc243582672
 Deliberately throwing a match violates this agreement in the manual | What is the Competition Integrity Contract? | Competition Manual §1.5, Competition Integrity Contract | https://ftc-resources.firstinspires.org/ftc/game/cm-html#_Toc243582676
-This FIRST value is demonstrated when a team helps repair a rival's robot before competing against it. | What is Coopertition? | Competition Manual §1.3.2, Coopertition | https://ftc-resources.firstinspires.org/ftc/game/cm-html#_Toc172868177
 The letters in FIRST stand for For Inspiration and Recognition of Science and this | What is Technology? | Competition Manual §1.1, About FIRST | https://ftc-resources.firstinspires.org/ftc/game/cm-html#_Toc243582672
 
 CATEGORY: Power and Control
@@ -296,7 +295,7 @@ An easy way to remember the starting tilt: the cell that points at a flower begi
 AprilTag clusters let a robot tell which way this structure is tipped | What is the hive? | Competition Manual §9.9, AprilTags | https://ftc-resources.firstinspires.org/ftc/game/cm-html#_Toc243582713
 Under G418, robots may remove only this scoring-element type from a flower's bottom. | What is pollen? | Competition Manual §9.7, Flower | https://ftc-resources.firstinspires.org/ftc/game/cm-html#_Toc243582711
 With 60 seconds left, an alliance may enter all of these that are still off the field | What is its remaining nectar? | Competition Manual §11, G426 | https://ftc-resources.firstinspires.org/ftc/game/cm-html#G426
-A robot puts nectar into the flower scoring volume at 1:05. Each nectar incurs this penalty even if it later scores. | What is a major foul? | Competition Manual §10.5.2, Flower scoring | https://ftc-resources.firstinspires.org/ftc/game/cm-html#_Ref237946722
+A robot puts nectar into the flower scoring volume at 1:05. Each nectar incurs this type of penalty even if it later scores. | What is a major foul? | Competition Manual §10.5.2, Flower scoring | https://ftc-resources.firstinspires.org/ftc/game/cm-html#_Ref237946722
 Either alliance's nectar can score in your garden, and so can this other piece | What is pollen? | Competition Manual §10.5.3, Garden scoring | https://ftc-resources.firstinspires.org/ftc/game/cm-html#_Toc209089384
 NECTAR in this position awards Flower ownership. | What is the top most NECTAR? | Competition Manual §10.5.2, Flower owner | https://ftc-resources.firstinspires.org/ftc/game/cm-html#_Ref237946722
 Besides pollen, launching these larger balls into the upward-facing cell can tip the hive | What is nectar? | Competition Manual §9.8, Scoring Elements | https://ftc-resources.firstinspires.org/ftc/game/cm-html#_Toc243582712
@@ -308,7 +307,6 @@ A robot may not start inside this zone, even though parking there scores later |
 A robot may not start while touching one of these, or inside its scoring volume | What is a FLOWER? | Competition Manual G304, ROBOTS must be set up correctly on the FIELD | https://ftc-resources.firstinspires.org/ftc/game/cm-html#G304
 Teams show they are ready by choosing an OpMode and pressing this | What is INIT? | Competition Manual §11, G305 | https://ftc-resources.firstinspires.org/ftc/game/cm-html#G305
 A team that will not run autonomous still has to initialize one of these | What is an OpMode? | Competition Manual §11, G305 | https://ftc-resources.firstinspires.org/ftc/game/cm-html#G305
-When a team initializes an AUTO OpMode before a match, this timer must be enabled. | What is the 30-second AUTO timer? | Competition Manual §11, OpMode selection | https://ftc-resources.firstinspires.org/ftc/game/cm-html#_Toc243582725
 After INIT, the robot must stay like this until the match begins | What is motionless? | Competition Manual §11, robot setup | https://ftc-resources.firstinspires.org/ftc/game/cm-html#_Toc243582725
 Robot signs must already show the correct one of these | What is the alliance color? | Competition Manual §11, match-start requirements | https://ftc-resources.firstinspires.org/ftc/game/cm-html#_Toc243582725
 The only team-supplied object left on the field at the start is this | What is the robot? | Competition Manual G303, ROBOTS on the FIELD must come ready to play a MATCH | https://ftc-resources.firstinspires.org/ftc/game/cm-html#G303
@@ -325,7 +323,6 @@ A hive tip earns permission to enter one nectar, but does not require it to be e
 Pollen, or the other alliance's nectar, that leaves the field should be handed to these people | Who is field staff? | Competition Manual §11, entering nectar | https://ftc-resources.firstinspires.org/ftc/game/cm-html#_Toc243582725
 Once the match starts, drive team members stay inside this area | What is the ALLIANCE AREA? | Competition Manual §11, G422 | https://ftc-resources.firstinspires.org/ftc/game/cm-html#G422
 A drive coach may not hold these after the match starts | What are the gamepads? | Competition Manual §11, G423 DRIVE COACHES and other teams: hands off the controls | https://ftc-resources.firstinspires.org/ftc/game/cm-html#G423
-A drive coach may still press init, start, and stop on this device | What is the DRIVER STATION? | Competition Manual §11, G423 DRIVE COACHES and other teams: hands off the controls | https://ftc-resources.firstinspires.org/ftc/game/cm-html#G423
 Once the match starts, except for safety, a drive team member may not do this to a robot, or to a piece already touching a robot or a tile | What is contact it? | Competition Manual §11, drive team reach | https://ftc-resources.firstinspires.org/ftc/game/cm-html#_Toc243582725
 Shaking the wall by hand so pieces fall out of a flower counts as this | What is disrupting scoring? | Competition Manual §11, drive team reach | https://ftc-resources.firstinspires.org/ftc/game/cm-html#_Toc243582725
 To help referees verify legal entry timing, drive teams should keep their unused supply of this visible. | What is NECTAR? | Competition Manual §11.4.6, G426 Humans may not enter NECTAR onto the FIELD early | https://ftc-resources.firstinspires.org/ftc/game/cm-html#G426
@@ -340,7 +337,7 @@ A pin may not last longer than this | What is 3 seconds? | Competition Manual §
 A pin count ends once the robots have separated by at least this many feet from each other for more than 3 seconds. | What is 2 feet? | Competition Manual §11, pins | https://ftc-resources.firstinspires.org/ftc/game/cm-html#_Toc243582725
 A pin also ends if either robot moves at least 2 feet from where the pin began and stays there for more than this long | What is 3 seconds? | Competition Manual G421 | https://ftc-resources.firstinspires.org/ftc/game/cm-html#G421
 A PIN count ends immediately when the robot doing the pinning becomes this. | What is pinned? | Competition Manual §11, G421 There is a 3-count on PINS | https://ftc-resources.firstinspires.org/ftc/game/cm-html#G421
-A pin that keeps going draws another major foul every additional time span of this. | What is 3 seconds? | Competition Manual §11, pins | https://ftc-resources.firstinspires.org/ftc/game/cm-html#_Toc243582725
+A pin that keeps going draws another major foul for each additional span of this many seconds. | What is 3 seconds? | Competition Manual §11, pins | https://ftc-resources.firstinspires.org/ftc/game/cm-html#_Toc243582725
 Robots may not attach to, tangle with, or do this to an opponent | What is tip over? | Competition Manual G420, Do not tip or entangle | https://ftc-resources.firstinspires.org/ftc/game/cm-html#G420
 One ordinary frame-to-frame hit that happens to tip a robot is not automatically called this | What is strategic? | Competition Manual G420, Do not tip or entangle [G420](manual://114) | https://ftc-resources.firstinspires.org/ftc/game/cm-html#G420
 Using a wedge to deliberately overturn an opponent is an example of this defined kind of violation. | What is STRATEGIC? | Competition Manual G420, Do not tip or entangle | https://ftc-resources.firstinspires.org/ftc/game/cm-html#G420

@@ -657,7 +657,7 @@
         buzzBtn.style.color = inkFor(mine.hex);
         const out = Array.isArray(state.out) ? state.out : [];
         const lockedOut = out.indexOf(mine.id) !== -1;
-        const canBuzz = state.armed && !state.locked && !lockedOut;
+        const canBuzz = state.armed && !state.locked && !state.held && !lockedOut;
         const clock = clockSuffix();
         buzzBtn.disabled = !canBuzz;
         if (state.armed && lockedOut) {
@@ -672,6 +672,9 @@
         } else if (canBuzz) {
           statusEl.textContent = personName(mine.id);
           buzzBtn.textContent = "Buzz";
+        } else if (state.armed && state.held) {
+          statusEl.textContent = "Buzzers blocked";
+          buzzBtn.textContent = "Wait";
         } else {
           statusEl.textContent = "Wait for the answer";
           buzzBtn.textContent = "Wait";

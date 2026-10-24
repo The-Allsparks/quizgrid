@@ -73,6 +73,21 @@
 
     #clock[hidden] { display: none; }
 
+    #hold {
+      width: 100%;
+      min-height: 96px;
+      margin-top: 14px;
+      padding: 16px;
+      font-size: clamp(1.2rem, 3vw, 1.6rem);
+      touch-action: none;
+      user-select: none;
+    }
+
+    #hold.down {
+      background: var(--gold);
+      color: #111;
+    }
+
     .label {
       margin: 18px 0 6px;
       color: var(--gold);
@@ -213,6 +228,7 @@
     <p id="room-name" hidden></p>
     <p id="status">Connecting</p>
     <p id="clock" hidden></p>
+    <button id="hold" type="button" hidden aria-pressed="false">Hold to block buzzers</button>
   </header>
   <main>
     <p id="empty" hidden>Open a clue on the board.</p>
@@ -255,6 +271,7 @@
       const roomName = document.getElementById("room-name");
       const statusEl = document.getElementById("status");
       const clockEl = document.getElementById("clock");
+      const holdBtn = document.getElementById("hold");
       const emptyEl = document.getElementById("empty");
       const metaEl = document.getElementById("meta");
       const privacyEl = document.getElementById("privacy");
@@ -278,6 +295,10 @@
       let pending = false;
       let ended = false;
       let endedOn = "";
+      let holding = false;
+      let pointerDown = false;
+      let keyDown = false;
+      let activePointer = null;
 
       function colorById(id) {
         for (let i = 0; i < COLORS.length; i++) {
@@ -396,13 +417,41 @@
         return /^https?:\/\//i.test(url || "") ? url : "";
       }
 
+      function canBlock() {
+        const current = clue();
+        return !!(current && current.step === "answer" && !state.winner);
+      }
+
+      function syncHold() {
+        const open = canBlock();
+        const want = open && (pointerDown || keyDown);
+        if (holding !== want) {
+          holding = want;
+          send({ type: holding ? "hold" : "release" });
+        }
+        holdBtn.hidden = !open;
+        holdBtn.classList.toggle("down", holding);
+        holdBtn.setAttribute("aria-pressed", holding ? "true" : "false");
+        holdBtn.textContent = holding ? "Buzzers blocked" : "Hold to block buzzers";
+      }
+
+      function clearHold() {
+        pointerDown = false;
+        keyDown = false;
+        activePointer = null;
+        syncHold();
+      }
+
       function render() {
         const current = clue();
         const winnerName = state.winner ? personName(state.winner, "") : "";
+        syncHold();
         roomName.hidden = false;
         roomName.textContent = roomCode;
         if (state.winner) {
           statusEl.textContent = winnerName + " buzzed";
+        } else if ((holding || state.held) && current && current.step === "answer") {
+          statusEl.textContent = "Buzzers blocked";
         } else if (state.armed) {
           statusEl.textContent = "Buzzers open";
         } else {
@@ -526,6 +575,9 @@
         next.addEventListener("open", function () {
           statusEl.textContent = "Waiting for a clue";
           finishEl.hidden = false;
+          if (holding) {
+            send({ type: "hold" });
+          }
         });
         next.addEventListener("message", function (event) {
           let data;
@@ -573,6 +625,60 @@
         finishOpen.hidden = false;
         finishNote.hidden = false;
         sendAction({ type: "action", action: "finish" });
+      });
+
+      function endPointer(event) {
+        if (activePointer === null || event.pointerId !== activePointer) {
+          return;
+        }
+        activePointer = null;
+        pointerDown = false;
+        syncHold();
+      }
+
+      holdBtn.addEventListener("pointerdown", function (event) {
+        if (event.button !== 0 || activePointer !== null) {
+          return;
+        }
+        event.preventDefault();
+        activePointer = event.pointerId;
+        holdBtn.setPointerCapture(event.pointerId);
+        pointerDown = true;
+        syncHold();
+      });
+      holdBtn.addEventListener("pointerup", endPointer);
+      holdBtn.addEventListener("pointercancel", endPointer);
+      holdBtn.addEventListener("contextmenu", function (event) {
+        event.preventDefault();
+      });
+
+      document.addEventListener("keydown", function (event) {
+        if (event.key !== " " || event.repeat || keyDown || holdBtn.hidden) {
+          return;
+        }
+        const target = event.target;
+        if (target && target !== holdBtn && target !== document.body && target !== document.documentElement) {
+          return;
+        }
+        event.preventDefault();
+        keyDown = true;
+        syncHold();
+      });
+
+      document.addEventListener("keyup", function (event) {
+        if (event.key !== " " || !keyDown) {
+          return;
+        }
+        event.preventDefault();
+        keyDown = false;
+        syncHold();
+      });
+
+      window.addEventListener("blur", clearHold);
+      document.addEventListener("visibilitychange", function () {
+        if (document.visibilityState !== "visible") {
+          clearHold();
+        }
       });
 
       if (!CODE.test(roomCode) || token.length < 16) {
