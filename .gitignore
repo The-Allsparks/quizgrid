@@ -1,3 +1,6 @@
 # Copyrighted audio stays on your machine and is not part of the repo.
 *.mp3
 .wrangler/
+
+# Chatbot audit transcripts are local and can be regenerated.
+audit/out/

@@ -74,9 +74,9 @@ Game modifications will be published in or before the last regularly scheduled o
 CATEGORY: Pollen and Nectar
 These smaller yellow balls are one of the two scoring elements | What is pollen? | Competition Manual §9.8, Scoring Elements | https://ftc-resources.firstinspires.org/ftc/game/cm-html#_Toc243582712
 These approximately 3.6-inch red and blue scoring balls share this game name. | What is nectar? | Competition Manual §9.8, Scoring Elements | https://ftc-resources.firstinspires.org/ftc/game/cm-html#_Toc243582712
-This is the color of every pollen ball | What is yellow? | Competition Manual §9.8, Scoring Elements | https://ftc-resources.firstinspires.org/ftc/game/cm-html#_Toc243582712
-A pollen ball is about this many inches in diameter | What is 2.8 inches? | Competition Manual §9.8, Scoring Elements | https://ftc-resources.firstinspires.org/ftc/game/cm-html#_Toc243582712
-A nectar ball is about this many inches in diameter | What is 3.6 inches? | Competition Manual §9.8, Scoring Elements | https://ftc-resources.firstinspires.org/ftc/game/cm-html#_Toc243582712
+This is the color of every pollen | What is yellow? | Competition Manual §9.8, Scoring Elements | https://ftc-resources.firstinspires.org/ftc/game/cm-html#_Toc243582712
+A pollen is about this many inches in diameter | What is 2.8 inches? | Competition Manual §9.8, Scoring Elements | https://ftc-resources.firstinspires.org/ftc/game/cm-html#_Toc243582712
+A nectar is about this many inches in diameter | What is 3.6 inches? | Competition Manual §9.8, Scoring Elements | https://ftc-resources.firstinspires.org/ftc/game/cm-html#_Toc243582712
 This many pollen are used in one match | What is 40? | Competition Manual §9.8, Scoring Elements | https://ftc-resources.firstinspires.org/ftc/game/cm-html#_Toc243582712
 This many nectar of each color are used in one match | What is 8? | Competition Manual §9.8, Scoring Elements | https://ftc-resources.firstinspires.org/ftc/game/cm-html#_Toc243582712
 Each robot starts in contact with this many preloaded pollen | What is 4? | Competition Manual §10.3.1, Scoring Element setup | https://ftc-resources.firstinspires.org/ftc/game/cm-html#_Toc209089376
@@ -173,7 +173,7 @@ FIRST will not add a new achievement that earns these | What are ranking points?
 
 CATEGORY: Drive Team
 A drive team may include at most this many people | What is 4? | Competition Manual §10.2, Drive Team | https://ftc-resources.firstinspires.org/ftc/game/cm-html#_Toc243582718
-A drive team may include at most this many drivers | What is 3? | Competition Manual §10.2, Table 10-1 | https://ftc-resources.firstinspires.org/ftc/game/cm-html#_Toc243582718
+A drive team may include at most this many drivers | What is 2? | Competition Manual §10.2, Table 10-1 | https://ftc-resources.firstinspires.org/ftc/game/cm-html#_Toc243582718
 This drive team role is a guide or advisor and may be an adult | What is the drive coach? | Competition Manual §10.2, Table 10-1 | https://ftc-resources.firstinspires.org/ftc/game/cm-html#_Toc243582718
 This student role manages scoring elements | What is the human player? | Competition Manual §10.2, Table 10-1 | https://ftc-resources.firstinspires.org/ftc/game/cm-html#_Toc243582718
 At most this many drive team members may be non-students | What is 1? | Competition Manual §10.2, Drive Team | https://ftc-resources.firstinspires.org/ftc/game/cm-html#_Toc243582718
@@ -298,7 +298,7 @@ Under G418, robots may remove only this scoring-element type from a flower's bot
 With 60 seconds left, an alliance may enter all of these that are still off the field | What is its remaining nectar? | Competition Manual §11, G426 | https://ftc-resources.firstinspires.org/ftc/game/cm-html#G426
 A robot puts nectar into the flower scoring volume at 1:05. Each nectar incurs this penalty even if it later scores. | What is a major foul? | Competition Manual §10.5.2, Flower scoring | https://ftc-resources.firstinspires.org/ftc/game/cm-html#_Ref237946722
 Either alliance's nectar can score in your garden, and so can this other piece | What is pollen? | Competition Manual §10.5.3, Garden scoring | https://ftc-resources.firstinspires.org/ftc/game/cm-html#_Toc209089384
-Flower ownership awards points for all scoring balls, including those deposited by this alliance. | What is the opponent? | Competition Manual §10.5.2, Flower owner | https://ftc-resources.firstinspires.org/ftc/game/cm-html#_Ref237946722
+NECTAR in this position awards Flower ownership. | What is the top most NECTAR? | Competition Manual §10.5.2, Flower owner | https://ftc-resources.firstinspires.org/ftc/game/cm-html#_Ref237946722
 Besides pollen, launching these larger balls into the upward-facing cell can tip the hive | What is nectar? | Competition Manual §9.8, Scoring Elements | https://ftc-resources.firstinspires.org/ftc/game/cm-html#_Toc243582712
 The opening on top of a flower is about this many inches in diameter | What is 4 inches? | Competition Manual §9.7, Flower | https://ftc-resources.firstinspires.org/ftc/game/cm-html#_Toc243582711
 
