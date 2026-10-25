@@ -73,10 +73,56 @@
 
     #clock[hidden] { display: none; }
 
+    #burn {
+      position: fixed;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      z-index: 5;
+      height: 14px;
+      background: rgba(255, 255, 255, 0.16);
+      pointer-events: none;
+    }
+
+    #burn[hidden] { display: none; }
+
+    #burn-fill {
+      width: 100%;
+      height: 100%;
+      transform-origin: left center;
+      background: var(--gold);
+    }
+
+    #burn.warn #burn-fill { background: #ff8a00; }
+    #burn.urgent #burn-fill { background: #e10600; }
+
+    #burn.urgent {
+      animation: burn-pulse 0.4s ease-in-out infinite;
+    }
+
+    @keyframes burn-pulse {
+      50% { filter: brightness(1.45); }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      #burn.urgent { animation: none; }
+    }
+
+    #block-default {
+      width: 100%;
+      min-height: 48px;
+      margin-top: 14px;
+    }
+
+    #block-default[aria-pressed="true"] {
+      background: var(--gold);
+      color: #111;
+    }
+
     #hold {
       width: 100%;
       min-height: 96px;
-      margin-top: 14px;
+      margin-top: 8px;
       padding: 16px;
       font-size: clamp(1.2rem, 3vw, 1.6rem);
       touch-action: none;
@@ -194,6 +240,44 @@
       font-weight: 700;
     }
 
+    .award.offline {
+      position: relative;
+      box-shadow:
+        0 0 0 3px #000,
+        0 0 0 6px #ffcc00,
+        0 0 0 9px #e10600;
+    }
+
+    .award.offline::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      border-radius: inherit;
+      background: rgba(0, 0, 0, 0.28);
+      pointer-events: none;
+    }
+
+    .award input {
+      width: 6.2rem;
+      margin: 0;
+      padding: 0 4px;
+      border: 2px solid transparent;
+      border-radius: 4px;
+      background: transparent;
+      color: inherit;
+      font: inherit;
+      font-size: 1.6rem;
+      font-weight: 700;
+      text-align: center;
+    }
+
+    .award input:hover,
+    .award input:focus {
+      border-color: currentColor;
+      background: rgba(0, 0, 0, 0.16);
+      outline: none;
+    }
+
     #finish {
       width: min(40rem, 100%);
       margin: 28px auto 0;
@@ -228,6 +312,8 @@
     <p id="room-name" hidden></p>
     <p id="status">Connecting</p>
     <p id="clock" hidden></p>
+    <div id="burn" hidden aria-hidden="true"><div id="burn-fill"></div></div>
+    <button id="block-default" type="button" hidden aria-pressed="false">Block by default: off</button>
     <button id="hold" type="button" hidden aria-pressed="false">Hold to block buzzers</button>
   </header>
   <main>
@@ -271,6 +357,7 @@
       const roomName = document.getElementById("room-name");
       const statusEl = document.getElementById("status");
       const clockEl = document.getElementById("clock");
+      const blockDefaultBtn = document.getElementById("block-default");
       const holdBtn = document.getElementById("hold");
       const emptyEl = document.getElementById("empty");
       const metaEl = document.getElementById("meta");
@@ -296,6 +383,7 @@
       let ended = false;
       let endedOn = "";
       let holding = false;
+      let openedClue = "";
       let pointerDown = false;
       let keyDown = false;
       let activePointer = null;
@@ -359,13 +447,22 @@
       }
 
       function paintClock() {
+        const burn = document.getElementById("burn");
+        const fill = document.getElementById("burn-fill");
         const left = secondsLeft();
-        if (!state.winner) {
+        if (!state.winner || left === null) {
           clockEl.hidden = true;
+          burn.hidden = true;
+          burn.classList.remove("warn", "urgent");
           return;
         }
-        clockEl.hidden = left === null;
+        clockEl.hidden = false;
         clockEl.textContent = left > 0 ? String(Math.ceil(left)) : "Time";
+        const fraction = Math.max(0, left / (ANSWER_MS / 1000));
+        burn.hidden = false;
+        fill.style.transform = "scaleX(" + fraction.toFixed(4) + ")";
+        burn.classList.toggle("urgent", fraction <= 0.3);
+        burn.classList.toggle("warn", fraction > 0.3 && fraction <= 0.6);
       }
 
       function personName(id, fallback) {
@@ -422,8 +519,60 @@
         return !!(current && current.step === "answer" && !state.winner);
       }
 
+      function clueKey() {
+        const current = clue();
+        if (!current || current.step !== "answer") {
+          return "";
+        }
+        return current.id || "";
+      }
+
+      function blockPreferred() {
+        return !!state.blockDefault;
+      }
+
+      function paintBlockDefault(on) {
+        blockDefaultBtn.hidden = false;
+        blockDefaultBtn.setAttribute("aria-pressed", on ? "true" : "false");
+        blockDefaultBtn.textContent = on ? "Block by default: on" : "Block by default: off";
+      }
+
+      function unsteady(id) {
+        const taken = Array.isArray(state.taken) ? state.taken : [];
+        const stale = Array.isArray(state.stale) ? state.stale : [];
+        const seen = Array.isArray(state.seen) ? state.seen : [];
+        if (stale.indexOf(id) !== -1) {
+          return true;
+        }
+        return seen.indexOf(id) !== -1 && taken.indexOf(id) === -1;
+      }
+
+      function commitScore(input, id) {
+        const next = Math.floor(Number(input.value));
+        if (!Number.isFinite(next)) {
+          return;
+        }
+        const clamped = Math.max(-1000000, Math.min(1000000, next));
+        input.value = String(clamped);
+        send({ type: "action", action: "set-score", color: id, score: clamped });
+      }
+
       function syncHold() {
         const open = canBlock();
+        if (blockPreferred()) {
+          if (holding) {
+            holding = false;
+            pointerDown = false;
+            keyDown = false;
+            send({ type: "release" });
+          }
+          holdBtn.hidden = !open;
+          const blocked = !!state.held;
+          holdBtn.classList.toggle("down", blocked);
+          holdBtn.setAttribute("aria-pressed", blocked ? "true" : "false");
+          holdBtn.textContent = blocked ? "Tap to open buzzers" : "Tap to block buzzers";
+          return;
+        }
         const want = open && (pointerDown || keyDown);
         if (holding !== want) {
           holding = want;
@@ -433,6 +582,20 @@
         holdBtn.classList.toggle("down", holding);
         holdBtn.setAttribute("aria-pressed", holding ? "true" : "false");
         holdBtn.textContent = holding ? "Buzzers blocked" : "Hold to block buzzers";
+      }
+
+      function maintainDefaultBlock() {
+        if (!blockPreferred() || !canBlock()) {
+          return;
+        }
+        const key = clueKey();
+        if (openedClue && openedClue !== key) {
+          openedClue = "";
+        }
+        if (openedClue === key || state.held) {
+          return;
+        }
+        send({ type: "block" });
       }
 
       function clearHold() {
@@ -525,33 +688,59 @@
         finishOpen.disabled = pending;
         finishYes.disabled = pending;
         finishNo.disabled = pending;
-        scoresEl.innerHTML = "";
-        const amount = current ? Number(current.amount) : 0;
-        const scoring = !!(buzzing && amount);
-        scoreRows().forEach(function (row) {
-          const color = colorById(row.id);
-          if (!color) {
-            return;
-          }
-          const ink = inkFor(color.hex);
-          const card = document.createElement("div");
-          card.className = "award";
-          card.style.background = color.hex;
-          card.style.color = ink;
-          const name = document.createElement("strong");
-          name.textContent = row.name;
-          const value = document.createElement("b");
-          value.textContent = String(row.score);
-          card.appendChild(name);
-          card.appendChild(value);
-          if (scoring && (!buzzing || row.id === state.winner)) {
-            const controls = document.createElement("div");
-            controls.appendChild(scoreButton(ink, "+", amount, row.id));
-            controls.appendChild(scoreButton(ink, "−", -amount, row.id));
-            card.appendChild(controls);
-          }
-          scoresEl.appendChild(card);
-        });
+        paintBlockDefault(!!state.blockDefault);
+        const editingScore = document.activeElement && document.activeElement.dataset && document.activeElement.dataset.scoreEdit;
+        if (!editingScore) {
+          scoresEl.innerHTML = "";
+          const amount = current ? Number(current.amount) : 0;
+          const scoring = !!(buzzing && amount);
+          scoreRows().forEach(function (row) {
+            const color = colorById(row.id);
+            if (!color) {
+              return;
+            }
+            const ink = inkFor(color.hex);
+            const card = document.createElement("div");
+            card.className = "award" + (unsteady(row.id) ? " offline" : "");
+            card.style.background = color.hex;
+            card.style.color = ink;
+            if (unsteady(row.id)) {
+              card.title = row.name + " has connection trouble";
+            }
+            const name = document.createElement("strong");
+            name.textContent = row.name;
+            const value = document.createElement("input");
+            value.type = "number";
+            value.inputMode = "numeric";
+            value.dataset.scoreEdit = row.id;
+            value.value = String(row.score);
+            value.defaultValue = String(row.score);
+            value.setAttribute("aria-label", row.name + " score");
+            value.addEventListener("change", function () {
+              commitScore(value, row.id);
+            });
+            value.addEventListener("keydown", function (event) {
+              if (event.key === "Enter") {
+                event.preventDefault();
+                commitScore(value, row.id);
+                value.blur();
+              } else if (event.key === "Escape") {
+                value.value = value.defaultValue;
+                value.blur();
+              }
+            });
+            card.appendChild(name);
+            card.appendChild(value);
+            if (scoring && (!buzzing || row.id === state.winner)) {
+              const controls = document.createElement("div");
+              controls.appendChild(scoreButton(ink, "+", amount, row.id));
+              controls.appendChild(scoreButton(ink, "−", -amount, row.id));
+              card.appendChild(controls);
+            }
+            scoresEl.appendChild(card);
+          });
+        }
+        maintainDefaultBlock();
       }
 
       function scoreButton(ink, symbol, delta, color) {
@@ -636,8 +825,30 @@
         syncHold();
       }
 
+      blockDefaultBtn.addEventListener("click", function () {
+        const next = blockDefaultBtn.getAttribute("aria-pressed") !== "true";
+        if (next) {
+          openedClue = "";
+        }
+        paintBlockDefault(next);
+        send({ type: "block-default", on: next });
+      });
+
+      holdBtn.addEventListener("click", function () {
+        if (!blockPreferred() || holdBtn.hidden) {
+          return;
+        }
+        if (state.held) {
+          openedClue = clueKey();
+          send({ type: "unblock" });
+          return;
+        }
+        openedClue = "";
+        send({ type: "block" });
+      });
+
       holdBtn.addEventListener("pointerdown", function (event) {
-        if (event.button !== 0 || activePointer !== null) {
+        if (blockPreferred() || event.button !== 0 || activePointer !== null) {
           return;
         }
         event.preventDefault();
@@ -653,11 +864,25 @@
       });
 
       document.addEventListener("keydown", function (event) {
-        if (event.key !== " " || event.repeat || keyDown || holdBtn.hidden) {
+        if (event.key !== " " || event.repeat || holdBtn.hidden) {
           return;
         }
         const target = event.target;
-        if (target && target !== holdBtn && target !== document.body && target !== document.documentElement) {
+        if (target && (target.matches("input, textarea") || (target !== holdBtn && target !== document.body && target !== document.documentElement))) {
+          return;
+        }
+        if (blockPreferred()) {
+          event.preventDefault();
+          if (state.held) {
+            openedClue = clueKey();
+            send({ type: "unblock" });
+          } else {
+            openedClue = "";
+            send({ type: "block" });
+          }
+          return;
+        }
+        if (keyDown) {
           return;
         }
         event.preventDefault();

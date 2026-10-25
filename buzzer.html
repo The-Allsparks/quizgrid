@@ -569,6 +569,17 @@
         }
       }
 
+      let pingTimer = null;
+
+      function startPing() {
+        if (pingTimer) {
+          return;
+        }
+        pingTimer = setInterval(function () {
+          send({ type: "ping" });
+        }, 3000);
+      }
+
       function openMenu() {
         menuName.value = nameInput.value;
         nameNote.hidden = true;
@@ -643,7 +654,7 @@
             button.disabled = state.taken.indexOf(id) !== -1;
             button.addEventListener("click", function () {
               const name = nameInput.value;
-              remember(roomCode, "", name);
+              remember(roomCode, id, name);
               send({ type: "claim", color: id, name: name });
             });
             colorsEl.appendChild(button);
@@ -696,6 +707,7 @@
         socket = next;
         next.addEventListener("open", function () {
           showError("");
+          startPing();
           const color = savedColor();
           if (color) {
             send({ type: "claim", color: color, name: savedName() });
@@ -709,7 +721,6 @@
             return;
           }
           if (data.type === "error") {
-            remember(code, "", nameInput.value);
             showError(data.message);
             return;
           }
@@ -718,6 +729,14 @@
           }
           receivedAt = Date.now();
           state = data;
+          if (!data.you) {
+            const color = savedColor();
+            const taken = Array.isArray(data.taken) ? data.taken : [];
+            const teamsNow = Array.isArray(data.teams) ? data.teams : [];
+            if (color && teamsNow.indexOf(color) !== -1 && taken.indexOf(color) === -1) {
+              send({ type: "claim", color: color, name: savedName() });
+            }
+          }
           if (data.you) {
             const named = data.names && data.names[data.you] ? data.names[data.you] : "";
             const drafting = menu.classList.contains("open") || document.activeElement === nameInput;

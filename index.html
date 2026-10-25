@@ -54,10 +54,17 @@
       flex-wrap: wrap;
     }
 
+    #brand {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 4px;
+      min-width: 0;
+    }
+
     h1 {
       display: flex;
       align-items: center;
-      height: var(--qr-stack);
       margin: 0;
       font-size: min(var(--qr-stack), 8vw);
       line-height: 1;
@@ -89,6 +96,36 @@
     #title:focus-visible {
       outline: 2px solid var(--gold);
       outline-offset: 4px;
+    }
+
+    #title sup {
+      font-size: 0.42em;
+      letter-spacing: 0;
+      line-height: 0;
+      margin-left: 0.05em;
+      position: relative;
+      top: -0.7em;
+    }
+
+    #sponsor {
+      color: #f6e7a8;
+      font-size: clamp(0.72rem, 1.5vw, 0.95rem);
+      font-weight: 500;
+      letter-spacing: 0.04em;
+      line-height: 1.2;
+      text-align: center;
+      text-decoration: none;
+      text-shadow: none;
+    }
+
+    #sponsor:hover,
+    #sponsor:focus-visible {
+      color: #fff;
+    }
+
+    #sponsor:focus-visible {
+      outline: 2px solid var(--gold);
+      outline-offset: 3px;
     }
 
     .board-nav {
@@ -135,6 +172,8 @@
     }
 
     #header-tools {
+      position: relative;
+      z-index: 16;
       display: flex;
       align-items: flex-end;
       flex-wrap: wrap;
@@ -281,18 +320,92 @@
     #buzz-lock {
       position: fixed;
       top: max(12px, env(safe-area-inset-top));
-      left: 50%;
+      left: 12px;
       z-index: 25;
-      transform: translateX(-50%);
       width: max-content;
-      max-width: min(34rem, calc(100vw - 24px));
+      max-width: min(22rem, calc(100vw - 24px));
       min-width: 9rem;
       padding: 10px 18px 8px;
       border: 3px solid #fff;
       border-radius: 4px;
+      overflow: hidden;
       text-align: center;
       line-height: 1.1;
       user-select: none;
+    }
+
+    #burn {
+      position: fixed;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      z-index: 32;
+      height: 14px;
+      background: rgba(255, 255, 255, 0.16);
+      pointer-events: none;
+    }
+
+    #burn[hidden] {
+      display: none;
+    }
+
+    #burn-fill {
+      width: 100%;
+      height: 100%;
+      transform-origin: left center;
+      background: var(--gold);
+      box-shadow: 0 0 16px rgba(255, 204, 0, 0.7);
+    }
+
+    #burn.warn #burn-fill {
+      background: #ff8a00;
+      box-shadow: 0 0 16px rgba(255, 138, 0, 0.75);
+    }
+
+    #burn.urgent #burn-fill {
+      background: #e10600;
+      box-shadow: 0 0 18px rgba(225, 6, 0, 0.9);
+    }
+
+    #burn.urgent {
+      animation: burn-pulse 0.4s ease-in-out infinite;
+    }
+
+    @keyframes burn-pulse {
+      50% { filter: brightness(1.45); }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      #burn.urgent {
+        animation: none;
+      }
+    }
+
+    #buzz-lock:not(.cover) #buzz-qr {
+      display: none !important;
+    }
+
+    #buzz-lock.cover {
+      top: 0;
+      right: 0;
+      bottom: 0;
+      left: 0;
+      z-index: 26;
+      transform: none;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      width: auto;
+      max-width: none;
+      max-height: none;
+      overflow: auto;
+    }
+
+    body:has(#overlay.cover) #buzz-lock,
+    body:has(#moment.cover) #buzz-lock {
+      max-height: none;
+      overflow: visible;
     }
 
     #buzz-lock[hidden] {
@@ -422,6 +535,27 @@
     .score-team.leader {
       outline: 3px solid var(--gold);
       outline-offset: 2px;
+    }
+
+    .score-team.offline {
+      position: relative;
+      border: 3px solid #000;
+      box-shadow:
+        0 0 0 3px #ffcc00,
+        0 0 0 6px #e10600;
+    }
+
+    .score-team.offline.leader {
+      outline: none;
+    }
+
+    .score-team.offline::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      border-radius: inherit;
+      background: rgba(0, 0, 0, 0.28);
+      pointer-events: none;
     }
 
     .color-swatch {
@@ -684,21 +818,44 @@
 
     #overlay {
       position: fixed;
-      inset: 0;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: var(--title-band, 8rem);
       display: none;
       flex-direction: column;
       align-items: center;
       justify-content: center;
-      gap: 24px;
-      padding: 6vh 6vw;
+      gap: 4px;
+      padding: 8px 18px 18px;
+      padding-right: var(--tools-pad, 18px);
       background:
         radial-gradient(circle at top, #1b24ff 0%, var(--cell) 55%, #02055a 100%);
       cursor: pointer;
-      z-index: 10;
+      z-index: 12;
+      overflow: hidden;
     }
 
     #overlay.open {
       display: flex;
+    }
+
+    #overlay.cover {
+      bottom: 0;
+      height: auto;
+      z-index: 20;
+      gap: 24px;
+      padding: 6vh 6vw;
+      overflow: auto;
+    }
+
+    #overlay:not(.cover) #overlay-hint,
+    #overlay:not(.cover) #overlay-prompt-label {
+      display: none;
+    }
+
+    #overlay:not(.cover) #overlay-link {
+      display: none !important;
     }
 
     #overlay-label {
@@ -757,12 +914,30 @@
       text-shadow: 0 2px 10px rgba(0, 0, 0, 0.45);
     }
 
-    #overlay.question {
+    #overlay.question:not(.cover) {
+      gap: 2px;
+      padding: 6px 12px 16px;
+      padding-right: var(--tools-pad, 12px);
+    }
+
+    #overlay.question:not(.cover) #overlay-text {
+      color: var(--gold);
+      font-size: clamp(1rem, 2.4vw, 1.8rem);
+      line-height: 1.15;
+      white-space: normal;
+    }
+
+    #overlay.question:not(.cover) #overlay-prompt {
+      font-size: clamp(0.85rem, 1.6vw, 1.15rem);
+      line-height: 1.2;
+    }
+
+    #overlay.question.cover {
       gap: 14px;
       padding: 4vh 3vw 10vh;
     }
 
-    #overlay.question #overlay-text {
+    #overlay.question.cover #overlay-text {
       color: var(--gold);
       width: auto;
       max-width: 92vw;
@@ -772,29 +947,29 @@
     }
 
     @media (max-width: 700px) {
-      #overlay {
+      #overlay.cover {
         gap: 12px;
         padding: 3vh 4vw 9vh;
         overflow: auto;
       }
 
-      #overlay-text {
+      #overlay.cover #overlay-text {
         font-size: clamp(1.15rem, 5.4vw, 2.2rem);
         line-height: 1.2;
       }
 
-      #overlay.question {
+      #overlay.question.cover {
         gap: 8px;
         padding: 2vh 4vw 8vh;
       }
 
-      #overlay.question #overlay-text {
+      #overlay.question.cover #overlay-text {
         max-width: 92vw;
         font-size: clamp(1.35rem, 7vw, 2.5rem);
         white-space: normal;
       }
 
-      #overlay-prompt {
+      #overlay.cover #overlay-prompt {
         font-size: clamp(0.95rem, 3.6vw, 1.2rem);
         line-height: 1.25;
       }
@@ -813,17 +988,36 @@
 
     #moment {
       position: fixed;
-      inset: 0;
-      z-index: 28;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: var(--title-band, 8rem);
+      z-index: 12;
       display: flex;
       flex-direction: column;
       align-items: center;
       justify-content: center;
-      gap: 18px;
-      padding: 24px;
+      gap: 6px;
+      padding: 8px 18px;
+      padding-right: var(--tools-pad, 18px);
+      overflow: hidden;
       background: rgba(0, 8, 20, 0.94);
       cursor: pointer;
       text-align: center;
+    }
+
+    #moment.cover {
+      bottom: 0;
+      height: auto;
+      z-index: 28;
+      gap: 18px;
+      padding: 24px;
+      overflow: auto;
+    }
+
+    #moment:not(.cover) #moment-standings,
+    #moment:not(.cover) #moment-hint {
+      display: none;
     }
 
     #moment[hidden] {
@@ -889,11 +1083,11 @@
     }
 
     #award-bar {
-      position: absolute;
+      position: fixed;
       left: 0;
       right: 0;
       bottom: 64px;
-      z-index: 4;
+      z-index: 24;
       display: flex;
       flex-wrap: wrap;
       justify-content: center;
@@ -1087,11 +1281,14 @@
 </head>
 <body>
   <header>
-    <h1>
-      <button id="board-prev" class="board-nav" type="button" aria-label="Previous board"><span></span></button>
-      <button id="title" type="button" title="Deal a new game">Quizgrid</button>
-      <button id="board-next" class="board-nav" type="button" aria-label="Next board"><span></span></button>
-    </h1>
+    <div id="brand">
+      <h1>
+        <button id="board-prev" class="board-nav" type="button" aria-label="Previous board"><span></span></button>
+        <button id="title" type="button" title="Deal a new game">Quizgrid</button>
+        <button id="board-next" class="board-nav" type="button" aria-label="Next board"><span></span></button>
+      </h1>
+      <a id="sponsor" href="https://www.theallsparks.org" target="_blank" rel="noopener noreferrer">Brought to you by The Allsparks</a>
+    </div>
     <div id="header-tools">
       <div id="score-bar" hidden></div>
       <div id="room" hidden>
@@ -1159,7 +1356,7 @@
       <p>The Allsparks is fiscally sponsored by Hack Club. Hack Club's legal name is The Hack Foundation, a 501(c)(3) nonprofit, so donations are tax-deductible. <a href="https://hcb.hackclub.com/donations/start/the-allsparks" target="_blank" rel="noopener noreferrer">Give online through Hack Club.</a></p>
       <h3>Disclaimer</h3>
       <p>This is an unofficial classroom board. Jeopardy! is a trademark of Jeopardy Productions, Inc. This page is independent of Jeopardy Productions, Inc. and Sony Pictures Television.</p>
-      <p class="first-credit" hidden>FIRST, FIRST Tech Challenge, and BIOBUZZ are trademarks of For Inspiration and Recognition of Science and Technology (FIRST). This board is a study aid. The Competition Manual and official Team Updates are the rules.</p>
+      <p class="first-credit" hidden>FIRST®, FIRST® Tech Challenge, FTC®, and BIOBUZZ™ are trademarks of For Inspiration and Recognition of Science and Technology (FIRST). This board is a study aid. The Competition Manual and official Team Updates are the rules.</p>
       <h3>Thank you</h3>
       <p>Thank you to the Internet Archive for hosting the think music recording.</p>
       <p class="first-credit" hidden>Thank you to FIRST for publishing the BIOBUZZ Competition Manual and Team Updates.</p>
@@ -1190,9 +1387,10 @@
     <div id="overlay-label"></div>
     <div id="overlay-text"></div>
     <a id="overlay-link" href="" target="_blank" rel="noopener noreferrer"></a>
-    <div id="award-bar" hidden></div>
     <div id="overlay-hint">Click to continue</div>
   </div>
+  <div id="award-bar" hidden></div>
+  <div id="burn" hidden aria-hidden="true"><div id="burn-fill"></div></div>
   <div id="moment" hidden>
     <p id="moment-kicker"></p>
     <h2 id="moment-title"></h2>
@@ -1302,6 +1500,7 @@
       let buzzAudio = null;
       let roomState = null;
       let clockTimer = null;
+      let burnFrame = 0;
       let lastActionId = "";
       const ANSWER_MS = 10000;
       const ROOM_ALPHABET = "ABCDEFGHJKLMNPQRSTUVWXYZ23456789";
@@ -1339,8 +1538,30 @@
         advanceOverlay();
       });
 
-      titleEl.textContent = game.title;
-      document.title = game.title;
+      function setBoardTitle(title) {
+        const plain = String(title || "");
+        document.title = plain.replace(/\bFTC\b/g, "FTC\u00AE").replace(/\bBIOBUZZ\b/gi, "BIOBUZZ\u2122");
+        titleEl.replaceChildren();
+        const pattern = /\b(FTC|BIOBUZZ)\b/gi;
+        let last = 0;
+        let match;
+        while ((match = pattern.exec(plain)) !== null) {
+          if (match.index > last) {
+            titleEl.append(plain.slice(last, match.index));
+          }
+          const word = match[1].toUpperCase() === "BIOBUZZ" ? "BIOBUZZ" : match[1];
+          titleEl.append(word);
+          const mark = document.createElement("sup");
+          mark.textContent = word === "FTC" ? "\u00AE" : "\u2122";
+          titleEl.append(mark);
+          last = pattern.lastIndex;
+        }
+        if (last < plain.length || !titleEl.childNodes.length) {
+          titleEl.append(plain.slice(last));
+        }
+      }
+
+      setBoardTitle(game.title);
       updateSoundButtons();
       updateBuzzerButton();
       renderTeamMenu();
@@ -1444,8 +1665,106 @@
       document.addEventListener("keydown", unlockBuzzAudio);
 
       window.addEventListener("resize", function () {
+        syncPopupCover();
         fitOverlayType();
       });
+
+      let pointerX = -1;
+      let pointerY = -1;
+      let buzzBox = null;
+
+      function hoverEnlarge() {
+        return window.matchMedia("(hover: hover) and (pointer: fine)").matches;
+      }
+
+      function titleBandBottom() {
+        const header = document.querySelector("header");
+        return header ? header.getBoundingClientRect().bottom : 0;
+      }
+
+      function syncTitleBand() {
+        const header = document.querySelector("header");
+        const bottom = titleBandBottom();
+        if (bottom > 0) {
+          const next = Math.ceil(bottom) + "px";
+          if (document.documentElement.style.getPropertyValue("--title-band") !== next) {
+            document.documentElement.style.setProperty("--title-band", next);
+          }
+        }
+        const tools = document.getElementById("header-tools");
+        const menu = document.getElementById("menu");
+        const anchor = tools && tools.getBoundingClientRect().width > 8 ? tools : menu;
+        if (anchor && header) {
+          const pad = Math.max(18, Math.ceil(header.getBoundingClientRect().right - anchor.getBoundingClientRect().left) + 12);
+          const nextPad = pad + "px";
+          if (document.documentElement.style.getPropertyValue("--tools-pad") !== nextPad) {
+            document.documentElement.style.setProperty("--tools-pad", nextPad);
+          }
+        }
+      }
+
+      function boxHit(el) {
+        if (!el) {
+          return false;
+        }
+        const rect = el.getBoundingClientRect();
+        if (rect.width < 2 || rect.height < 2) {
+          return false;
+        }
+        return pointerX >= rect.left && pointerX <= rect.right && pointerY >= rect.top && pointerY <= rect.bottom;
+      }
+
+      function pointerInTitle() {
+        if (pointerY < 0 || pointerY > titleBandBottom()) {
+          return false;
+        }
+        if (boxHit(document.getElementById("header-tools")) || boxHit(document.getElementById("menu"))) {
+          return false;
+        }
+        return true;
+      }
+
+      function setCover(el, on) {
+        if (!el) {
+          return false;
+        }
+        const has = el.classList.contains("cover");
+        if (has === !!on) {
+          return false;
+        }
+        el.classList.toggle("cover", !!on);
+        return true;
+      }
+
+      function syncPopupCover() {
+        syncTitleBand();
+        const hover = hoverEnlarge();
+        const over = hover && pointerInTitle();
+        const clue = overlayEl.classList.contains("open");
+        const moment = !momentEl.hidden;
+        const buzz = document.getElementById("buzz-lock");
+        let changed = setCover(overlayEl, clue);
+        changed = setCover(momentEl, moment && (!hover || over)) || changed;
+        let buzzHot = false;
+        if (buzz && !buzz.hidden && !clue && !moment && hover) {
+          if (!buzz.classList.contains("cover")) {
+            buzzBox = buzz.getBoundingClientRect();
+          }
+          buzzHot = !!(buzzBox && pointerX >= buzzBox.left && pointerX <= buzzBox.right && pointerY >= buzzBox.top && pointerY <= buzzBox.bottom);
+        }
+        changed = setCover(buzz, buzzHot) || changed;
+        overlayEl.title = "";
+        if (changed) {
+          requestAnimationFrame(fitOverlayType);
+        }
+      }
+
+      document.addEventListener("pointermove", function (event) {
+        pointerX = event.clientX;
+        pointerY = event.clientY;
+        syncPopupCover();
+      });
+      syncTitleBand();
 
       if (document.fonts && document.fonts.ready) {
         document.fonts.ready.then(function () {
@@ -1731,6 +2050,8 @@
         teams.forEach(function (team) {
           team.score = 0;
         });
+        retiredTeams = {};
+        writeSession(retiredKey(), retiredTeams);
         saveTeams();
         savePlayed();
         saveRound();
@@ -1738,6 +2059,7 @@
         sendRoom({ type: "disarm" });
         hideMoment();
         overlayEl.classList.remove("open", "question");
+        syncPopupCover();
         renderAwardBar();
         renderAll();
         publishBoard();
@@ -1827,11 +2149,35 @@
         writeSession(boardStorageKey("teams"), teams);
       }
 
+      function retiredKey() {
+        return boardStorageKey("retired-teams");
+      }
+
+      function loadRetired() {
+        const saved = readSession(retiredKey());
+        if (!saved || typeof saved !== "object" || Array.isArray(saved)) {
+          return {};
+        }
+        return saved;
+      }
+
+      let retiredTeams = loadRetired();
+
+      function rememberRetired(team) {
+        retiredTeams[team.id] = { score: team.score, name: team.name || "" };
+        writeSession(retiredKey(), retiredTeams);
+      }
+
       function addTeam(id) {
         if (!colorById(id) || teamById(id)) {
           return;
         }
-        teams.push({ id: id, score: 0, name: "" });
+        const prior = retiredTeams[id];
+        const score = prior ? Number(prior.score) : 0;
+        const name = prior && typeof prior.name === "string" ? prior.name : "";
+        teams.push({ id: id, score: Number.isFinite(score) ? score : 0, name: name });
+        delete retiredTeams[id];
+        writeSession(retiredKey(), retiredTeams);
         saveTeams();
         renderTeamMenu();
         renderScoreBar();
@@ -1842,11 +2188,14 @@
       }
 
       function removeTeam(id) {
+        const leaving = teamById(id);
+        if (leaving) {
+          rememberRetired(leaving);
+        }
         teams = teams.filter(function (team) {
           return team.id !== id;
         });
         saveTeams();
-        stripAwardsFor(id);
         renderTeamMenu();
         renderAll();
         renderAwardBar();
@@ -1865,6 +2214,18 @@
         if (active) {
           recordAward(active.id, id, delta);
         }
+        renderScoreBar(id);
+        publishBoard();
+      }
+
+      function setScore(id, score) {
+        const team = teamById(id);
+        const next = Math.floor(Number(score));
+        if (!team || !Number.isFinite(next)) {
+          return;
+        }
+        team.score = Math.max(-1000000, Math.min(1000000, next));
+        saveTeams();
         renderScoreBar(id);
         publishBoard();
       }
@@ -2036,22 +2397,37 @@
         return ids;
       }
 
+      function teamUnsteady(id) {
+        if (!roomState) {
+          return false;
+        }
+        const taken = Array.isArray(roomState.taken) ? roomState.taken : [];
+        const stale = Array.isArray(roomState.stale) ? roomState.stale : [];
+        const seen = Array.isArray(roomState.seen) ? roomState.seen : [];
+        if (stale.indexOf(id) !== -1) {
+          return true;
+        }
+        return seen.indexOf(id) !== -1 && taken.indexOf(id) === -1;
+      }
+
       function renderScoreBar(bumpedId) {
         scoreBar.innerHTML = "";
         scoreBar.hidden = teams.length < 2;
         syncRoomVisibility();
         if (scoreBar.hidden) {
+          syncTitleBand();
           return;
         }
         const leaders = leaderIds();
         teams.forEach(function (team) {
           const color = colorById(team.id);
+          const unsteady = teamUnsteady(team.id);
           const item = document.createElement("div");
-          item.className = "score-team" + (team.id === bumpedId ? " bump" : "") + (leaders[team.id] ? " leader" : "");
+          item.className = "score-team" + (team.id === bumpedId ? " bump" : "") + (leaders[team.id] ? " leader" : "") + (unsteady ? " offline" : "");
           item.style.background = color.hex;
           item.style.color = inkFor(color.hex);
-          item.title = teamLabel(team);
-          item.setAttribute("aria-label", teamLabel(team) + ", " + formatMoney(team.score));
+          item.title = teamLabel(team) + (unsteady ? " — connection trouble" : "");
+          item.setAttribute("aria-label", teamLabel(team) + ", " + formatMoney(team.score) + (unsteady ? ", connection trouble" : ""));
           const name = document.createElement("span");
           name.className = "score-name";
           name.textContent = teamLabel(team);
@@ -2061,6 +2437,7 @@
           item.appendChild(value);
           scoreBar.appendChild(item);
         });
+        syncTitleBand();
       }
 
       function renderAwardBar() {
@@ -2264,7 +2641,7 @@
       }
 
       function openClue(category, clue, id) {
-        if (played.has(id)) {
+        if (active || !momentEl.hidden || played.has(id)) {
           return;
         }
         active = { category: category, clue: clue, id: id, step: "answer" };
@@ -2276,6 +2653,7 @@
         overlayPrompt.textContent = "";
         hideSource();
         clearQuestionFit();
+        syncPopupCover();
         fitAnswerText();
         console.log("[Judge] " + clueMeta(category, clue) + "\n" + clue.question);
         overlayHint.textContent = "Click to continue. Esc puts it back.";
@@ -2296,6 +2674,7 @@
         clearQuestionFit();
         active = null;
         overlayEl.classList.remove("open", "question");
+        syncPopupCover();
         renderAwardBar();
         publishBoard();
       }
@@ -2328,6 +2707,7 @@
         savePlayed();
         active = null;
         overlayEl.classList.remove("open", "question");
+        syncPopupCover();
         renderAwardBar();
         if (!wasComplete && isRoundComplete(roundIndex) && canOpenRound(roundIndex + 1)) {
           roundIndex += 1;
@@ -2358,6 +2738,7 @@
         momentStandings.innerHTML = "";
         momentHint.textContent = "Click to start";
         momentEl.hidden = false;
+        syncPopupCover();
       }
 
       function showFinalCard() {
@@ -2396,10 +2777,12 @@
         });
         momentHint.textContent = "Click to close";
         momentEl.hidden = false;
+        syncPopupCover();
       }
 
       function hideMoment() {
         momentEl.hidden = true;
+        momentEl.classList.remove("cover");
       }
 
       function showSource(clue) {
@@ -2428,7 +2811,15 @@
       }
 
       function fitLimit() {
-        var limit = overlayHint.getBoundingClientRect().top - 16;
+        var overlayBox = overlayEl.getBoundingClientRect();
+        var limit = overlayBox.bottom - 10;
+        var hintStyle = window.getComputedStyle(overlayHint);
+        if (hintStyle.display !== "none") {
+          var hintTop = overlayHint.getBoundingClientRect().top - 12;
+          if (hintTop > overlayBox.top && hintTop < limit) {
+            limit = hintTop;
+          }
+        }
         if (awardBar && !awardBar.hidden) {
           var awardTop = awardBar.getBoundingClientRect().top;
           if (awardTop > 0 && awardTop < limit) {
@@ -2491,7 +2882,7 @@
           return;
         }
         var maxHeight = overlayEl.clientHeight * (tight ? 0.18 : 0.26);
-        var floor = window.innerWidth < 700 ? 13 : 20;
+        var floor = overlayEl.clientHeight < 260 ? 12 : (window.innerWidth < 700 ? 13 : 20);
         var size = parseFloat(window.getComputedStyle(overlayPrompt).fontSize);
         var guard = 0;
         if (!size) {
@@ -2513,7 +2904,7 @@
           return;
         }
         var computed = parseFloat(window.getComputedStyle(overlayText).fontSize) || 48;
-        var floor = window.innerWidth < 700 ? 16 : 24;
+        var floor = overlayEl.clientHeight < 260 ? 12 : (window.innerWidth < 700 ? 16 : 24);
         largestFit(overlayText, floor, computed);
       }
 
@@ -2546,7 +2937,7 @@
         overlayText.style.width = target + "px";
         overlayText.style.maxWidth = target + "px";
         capPrompt(true);
-        var floor = window.innerWidth < 700 ? 16 : 24;
+        var floor = overlayEl.clientHeight < 260 ? 12 : (window.innerWidth < 700 ? 16 : 24);
         var ceiling = Math.max(floor, Math.floor(overlayEl.clientHeight * 0.16));
         largestFit(overlayText, floor, ceiling);
       }
@@ -2929,6 +3320,7 @@
             roomState.receivedAt = Date.now();
             applyRoomNames(data.names);
             renderBuzzLock();
+            renderScoreBar();
             renderAwardBar();
             syncBuzzHint();
             if (everyTeamOut()) {
@@ -3050,6 +3442,10 @@
           return;
         }
         lastActionId = data.id;
+        if (data.action === "set-score") {
+          setScore(data.color, data.score);
+          return;
+        }
         if (data.action === "award") {
           if (!active || active.step !== "answer") {
             return;
@@ -3111,6 +3507,7 @@
         active = null;
         overlayAdvancing = false;
         overlayEl.classList.remove("open", "question");
+        syncPopupCover();
         renderAwardBar();
         renderAll();
         showFinalCard();
@@ -3165,6 +3562,43 @@
         }
         const elapsed = (roomState.now - roomState.lockedAt) + (Date.now() - roomState.receivedAt);
         return Math.max(0, (ANSWER_MS - elapsed) / 1000);
+      }
+
+      function paintBurn() {
+        const burn = document.getElementById("burn");
+        const fill = document.getElementById("burn-fill");
+        const left = secondsLeft();
+        if (left === null) {
+          burn.hidden = true;
+          burn.classList.remove("warn", "urgent");
+          if (burnFrame) {
+            cancelAnimationFrame(burnFrame);
+            burnFrame = 0;
+          }
+          return;
+        }
+        const fraction = Math.max(0, left / (ANSWER_MS / 1000));
+        burn.hidden = false;
+        fill.style.transform = "scaleX(" + fraction.toFixed(4) + ")";
+        burn.classList.toggle("urgent", fraction <= 0.3);
+        burn.classList.toggle("warn", fraction > 0.3 && fraction <= 0.6);
+        if (left <= 0 || burnFrame) {
+          return;
+        }
+        const tick = function () {
+          const remain = secondsLeft();
+          if (remain === null || remain <= 0) {
+            burnFrame = 0;
+            paintBurn();
+            return;
+          }
+          const next = remain / (ANSWER_MS / 1000);
+          fill.style.transform = "scaleX(" + next.toFixed(4) + ")";
+          burn.classList.toggle("urgent", next <= 0.3);
+          burn.classList.toggle("warn", next > 0.3 && next <= 0.6);
+          burnFrame = requestAnimationFrame(tick);
+        };
+        burnFrame = requestAnimationFrame(tick);
       }
 
       function ensureClock() {
@@ -3284,6 +3718,8 @@
             buzzSnapshotSeen = true;
             buzzWinner = state.winner || null;
           }
+          syncPopupCover();
+          paintBurn();
           return;
         }
         const taken = Array.isArray(state.taken) ? state.taken : [];
@@ -3302,6 +3738,8 @@
         if (!state.winner && !state.armed && !taken.length && !out.length) {
           banner.hidden = true;
           buzzQr.hidden = true;
+          syncPopupCover();
+          paintBurn();
           return;
         }
         banner.hidden = false;
@@ -3329,6 +3767,8 @@
             pulseBuzzLock(banner);
           }
           ensureClock();
+          syncPopupCover();
+          paintBurn();
           return;
         }
         clock.hidden = true;
@@ -3336,6 +3776,8 @@
         banner.style.color = "#ffcc00";
         title.textContent = state.held ? "Buzzers held" : (state.armed ? "Buzzers open" : "Buzzers");
         note.textContent = state.held ? "Release on the judge window" : (state.armed && !taken.length ? "No buzzers joined yet" : "");
+        syncPopupCover();
+        paintBurn();
       }
 
       document.getElementById("buzz-lock").addEventListener("click", function () {

@@ -2,7 +2,8 @@ import { DurableObject } from "cloudflare:workers";
 
 const COLORS = ["red", "blue", "green", "yellow", "orange", "purple", "pink", "white"];
 const CODE = /^[ABCDEFGHJKLMNPQRSTUVWXYZ23456789]{4}$/;
-const JUDGE_ACTIONS = ["award", "reveal", "close", "dismiss", "reopen", "finish"];
+const JUDGE_ACTIONS = ["award", "reveal", "close", "dismiss", "reopen", "finish", "set-score"];
+const STALE_MS = 12000;
 
 function emptyRoom() {
   return {
@@ -10,8 +11,11 @@ function emptyRoom() {
     teams: [],
     taken: {},
     names: {},
+    seen: [],
     armed: false,
     locked: false,
+    blocked: false,
+    blockDefault: false,
     winner: null,
     lockedAt: null,
     out: [],
@@ -207,7 +211,42 @@ export class BuzzRoom extends DurableObject {
         this.broadcast(room);
         return;
       }
+      if (data.type === "block-default" || data.type === "block" || data.type === "unblock") {
+        if (data.type === "block-default") {
+          room.blockDefault = !!data.on;
+          if (room.armed && !room.winner) {
+            room.blocked = room.blockDefault;
+          }
+        } else if (data.type === "block") {
+          room.blocked = true;
+        } else {
+          room.blocked = false;
+        }
+        await this.save(room);
+        this.broadcast(room);
+        return;
+      }
       this.forwardAction(data);
+      return;
+    }
+    if (data.type === "ping") {
+      if (!attachment.color || room.teams.indexOf(attachment.color) === -1) {
+        return;
+      }
+      const wasStale = this.isStale(attachment.color);
+      this.notePulse(attachment.color);
+      if (room.taken[attachment.color] === attachment.id) {
+        if (wasStale) {
+          this.broadcast(room);
+        }
+        return;
+      }
+      if (room.taken[attachment.color]) {
+        return;
+      }
+      room.taken[attachment.color] = attachment.id;
+      await this.save(room);
+      this.broadcast(room);
       return;
     }
     if (data.type === "claim") {
@@ -219,7 +258,7 @@ export class BuzzRoom extends DurableObject {
       this.broadcast(room);
       return;
     }
-    if (data.type === "buzz" && attachment.color && room.armed && !room.locked && !this.judgeHolding() && room.teams.indexOf(attachment.color) !== -1 && room.out.indexOf(attachment.color) === -1) {
+    if (data.type === "buzz" && attachment.color && room.armed && !room.locked && !room.blocked && !this.judgeHolding() && room.teams.indexOf(attachment.color) !== -1 && room.out.indexOf(attachment.color) === -1) {
       room.locked = true;
       room.winner = attachment.color;
       room.lockedAt = Date.now();
@@ -232,6 +271,10 @@ export class BuzzRoom extends DurableObject {
     const attachment = ws.deserializeAttachment() || {};
     if (attachment.role === "judge") {
       const room = await this.load();
+      if (!this.judgeOpen(attachment.id) && room.blocked) {
+        room.blocked = false;
+        await this.save(room);
+      }
       this.broadcast(room, attachment.id);
       return;
     }
@@ -274,12 +317,14 @@ export class BuzzRoom extends DurableObject {
         room.winner = null;
         room.out = [];
         room.lockedAt = null;
+        room.blocked = !!room.blockDefault;
       }
       return true;
     }
     if (data.type === "disarm") {
       room.armed = false;
       room.locked = false;
+      room.blocked = false;
       room.winner = null;
       room.out = [];
       room.lockedAt = null;
@@ -333,6 +378,17 @@ export class BuzzRoom extends DurableObject {
       action.color = data.color;
       action.delta = delta;
     }
+    if (data.action === "set-score") {
+      if (COLORS.indexOf(data.color) === -1) {
+        return;
+      }
+      const score = Math.floor(Number(data.score));
+      if (!Number.isFinite(score) || score < -1000000 || score > 1000000) {
+        return;
+      }
+      action.color = data.color;
+      action.score = score;
+    }
     const message = JSON.stringify(action);
     this.ctx.getWebSockets().forEach(function (ws) {
       const attachment = ws.deserializeAttachment() || {};
@@ -353,12 +409,17 @@ export class BuzzRoom extends DurableObject {
     }
     const owner = room.taken[color];
     if (owner && owner !== attachment.id) {
-      const stillHere = this.ctx.getWebSockets().some(function (open) {
-        const current = open.deserializeAttachment();
-        return current && current.id === owner;
-      });
-      if (stillHere) {
+      const ownerSocket = this.socketById(owner);
+      const alive = ownerSocket && ownerSocket.readyState === 1 && !this.isStale(color);
+      if (alive) {
         return false;
+      }
+      if (ownerSocket) {
+        try {
+          ownerSocket.close(4000, "Replaced");
+        } catch (error) {
+          // The old phone is already gone.
+        }
       }
     }
     if (attachment.color && attachment.color !== color && room.taken[attachment.color] === attachment.id) {
@@ -376,7 +437,83 @@ export class BuzzRoom extends DurableObject {
     } else {
       delete room.names[color];
     }
+    if (!Array.isArray(room.seen)) {
+      room.seen = [];
+    }
+    if (room.seen.indexOf(color) === -1) {
+      room.seen.push(color);
+    }
+    this.notePulse(color);
     return true;
+  }
+
+  socketById(id) {
+    const sockets = this.ctx.getWebSockets();
+    for (let i = 0; i < sockets.length; i++) {
+      const current = sockets[i].deserializeAttachment();
+      if (current && current.id === id) {
+        return sockets[i];
+      }
+    }
+    return null;
+  }
+
+  pulseMap() {
+    if (!this.pulse) {
+      this.pulse = new Map();
+    }
+    return this.pulse;
+  }
+
+  notePulse(color) {
+    this.pulseMap().set(color, Date.now());
+    this.scheduleStaleCheck();
+  }
+
+  isStale(color) {
+    const at = this.pulseMap().get(color);
+    if (!at) {
+      return false;
+    }
+    return Date.now() - at > STALE_MS;
+  }
+
+  staleColors(room) {
+    const stale = [];
+    const teams = Array.isArray(room.teams) ? room.teams : [];
+    teams.forEach((color) => {
+      if (!room.taken[color] || !this.isStale(color)) {
+        return;
+      }
+      stale.push(color);
+    });
+    return stale;
+  }
+
+  scheduleStaleCheck() {
+    const now = Date.now();
+    let next = 0;
+    this.pulseMap().forEach(function (at) {
+      const due = at + STALE_MS;
+      if (due <= now) {
+        return;
+      }
+      if (!next || due < next) {
+        next = due;
+      }
+    });
+    if (!next) {
+      return;
+    }
+    this.ctx.storage.setAlarm(next).catch(function () {
+      // The board still works if the alarm cannot be set.
+    });
+  }
+
+  async alarm() {
+    const room = await this.load();
+    this.broadcast(room);
+    this.scheduleStaleCheck();
   }
 
   releaseMissing(room) {
@@ -438,17 +575,20 @@ export class BuzzRoom extends DurableObject {
       taken: Object.keys(room.taken),
       names: room.names || {},
       armed: !!room.armed,
-      held: this.judgeHolding(closingId),
+      held: this.judgeHolding(closingId) || !!room.blocked,
       locked: !!room.locked,
       winner: room.winner || null,
       lockedAt: room.lockedAt || null,
       now: Date.now(),
       out: room.out,
+      seen: Array.isArray(room.seen) ? room.seen : [],
+      stale: this.staleColors(room),
       you: you,
       source: publicSource(room.board)
     };
     if (role === "host" || role === "judge") {
       payload.board = room.board || null;
+      payload.blockDefault = !!room.blockDefault;
     }
     if (role === "host") {
       payload.judge = this.judgeOpen(closingId);
@@ -466,8 +606,11 @@ export class BuzzRoom extends DurableObject {
       teams: Array.isArray(saved.teams) ? saved.teams : [],
       taken: saved.taken && typeof saved.taken === "object" ? saved.taken : {},
       names: cleanNames(saved.names),
+      seen: colorList(saved.seen),
       armed: !!saved.armed,
       locked: !!saved.locked,
+      blocked: !!saved.blocked,
+      blockDefault: !!saved.blockDefault,
       winner: typeof saved.winner === "string" ? saved.winner : null,
       lockedAt: Number.isFinite(saved.lockedAt) ? saved.lockedAt : null,
       out: colorList(saved.out),
