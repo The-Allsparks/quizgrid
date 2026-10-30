@@ -45,11 +45,11 @@
 // Clues follow the current BIOBUZZ Competition Manual HTML.
 // Citation links use https://ftc-resources.firstinspires.org/ftc/game/cm-html
 // That address redirects to the latest release and keeps the section anchor.
-// Today that release is TU06 (October 22, 2026).
-// Posted Updates uses Team Updates 00 through 06, through October 22, 2026.
+// Today that release is TU07 (October 29, 2026).
+// Posted Updates uses Team Updates 00 through 07, through October 29, 2026.
 // Q&A clarifications use answers posted through October 22, 2026.
-// Team Update 06 does not edit section 10.8.4.
-// The TU06 HTML still omits the Team Update 05 field-reset words "stop their ROBOTS."
+// Team Update 07 edits section 11. It does not edit section 10.8.4.
+// The TU07 HTML still omits the Team Update 05 field-reset words "stop their ROBOTS."
 // ============================================================
 
 const BOARD = `
@@ -57,74 +57,74 @@ TITLE: FTC BIOBUZZ
 
 CATEGORY: The Game
 This is the name of the 2026-2027 FIRST Tech Challenge game | What is BIOBUZZ? | Competition Manual §1.4.1, A Note from the FIRST Staff | https://ftc-resources.firstinspires.org/ftc/game/cm-html#Note
-This company presents the BIOBUZZ season | What is RTX? | Competition Manual §7, Game Sponsor Recognition | https://ftc-resources.firstinspires.org/ftc/game/cm-html#_Toc243582702
-Outside FIRST Championship playoffs, this many teams make up an alliance. | What is 2? | Competition Manual §8, Game Overview | https://ftc-resources.firstinspires.org/ftc/game/cm-html#_Toc243582703
-Robots launch scoring elements into this structure to tip it | What is the hive? | Competition Manual §8, Game Overview | https://ftc-resources.firstinspires.org/ftc/game/cm-html#_Toc243582703
-Alliances also place pollen and nectar into these wall structures | What are flowers? | Competition Manual §8, Game Overview | https://ftc-resources.firstinspires.org/ftc/game/cm-html#_Toc243582703
-The first 30 seconds, when robots run without driver input | What is AUTO? | Competition Manual §10.4, Match Periods | https://ftc-resources.firstinspires.org/ftc/game/cm-html#_Toc243582720
-The two-minute period when drivers control the robots | What is TELEOP? | Competition Manual §10.4, Match Periods | https://ftc-resources.firstinspires.org/ftc/game/cm-html#_Toc243582720
-This document is the source of truth for BIOBUZZ rules | What is the Competition Manual? | Competition Manual §1.7, Using the Competition Manual | https://ftc-resources.firstinspires.org/ftc/game/cm-html#_Toc243582678
-This agreement contains the Sporting Ethics Code and Behavior Guidelines. | What is the Competition Integrity Contract? | Competition Manual §1.5, Competition Integrity Contract | https://ftc-resources.firstinspires.org/ftc/game/cm-html#_Toc243582676
+This company presents the BIOBUZZ season | What is RTX? | Competition Manual §7, Game Sponsor Recognition | https://ftc-resources.firstinspires.org/ftc/game/cm-html#_Toc244189200
+Outside FIRST Championship playoffs, this many teams make up an alliance. | What is 2? | Competition Manual §8, Game Overview | https://ftc-resources.firstinspires.org/ftc/game/cm-html#_Toc244189201
+Robots launch scoring elements into this structure to tip it | What is the hive? | Competition Manual §8, Game Overview | https://ftc-resources.firstinspires.org/ftc/game/cm-html#_Toc244189201
+Alliances also place pollen and nectar into these wall structures | What are flowers? | Competition Manual §8, Game Overview | https://ftc-resources.firstinspires.org/ftc/game/cm-html#_Toc244189201
+The first 30 seconds, when robots run without driver input | What is AUTO? | Competition Manual §10.4, Match Periods | https://ftc-resources.firstinspires.org/ftc/game/cm-html#_Toc244189218
+The two-minute period when drivers control the robots | What is TELEOP? | Competition Manual §10.4, Match Periods | https://ftc-resources.firstinspires.org/ftc/game/cm-html#_Toc244189218
+This document is the source of truth for BIOBUZZ rules | What is the Competition Manual? | Competition Manual §1.7, Using the Competition Manual | https://ftc-resources.firstinspires.org/ftc/game/cm-html#_Toc244189176
+This agreement contains the Sporting Ethics Code and Behavior Guidelines. | What is the Competition Integrity Contract? | Competition Manual §1.5, Competition Integrity Contract | https://ftc-resources.firstinspires.org/ftc/game/cm-html#_Toc244189174
 A win plus all three achievement ranking points earns this many ranking points. | What is 6? | Competition Manual §10.5.5, Table 10-2 ranking points | https://ftc-resources.firstinspires.org/ftc/game/cm-html#_Toc209089385
-The alliance with more of these at the end of the match wins | What are match points? | Competition Manual §8, Game Overview | https://ftc-resources.firstinspires.org/ftc/game/cm-html#_Toc243582703
-These are beyond match points and earned for achievements. | What are ranking points? | Competition Manual §10.5, Scoring | https://ftc-resources.firstinspires.org/ftc/game/cm-html#_Toc243582721
-FIRST Championship playoff alliances roster this many teams, although only two play in a match. | What is 3? | Competition Manual §15.3, 3-Robot Alliances | https://ftc-resources.firstinspires.org/ftc/game/cm-html#_Toc243582753
-Game modifications will be published in or before the last regularly scheduled one of these | What is a Team Update? | Competition Manual §15.2, Game Modification, and Team Updates | https://ftc-resources.firstinspires.org/ftc/game/cm-html#_Toc243582752
+The alliance with more of these at the end of the match wins | What are match points? | Competition Manual §8, Game Overview | https://ftc-resources.firstinspires.org/ftc/game/cm-html#_Toc244189201
+These are beyond match points and earned for achievements. | What are ranking points? | Competition Manual §10.5, Scoring | https://ftc-resources.firstinspires.org/ftc/game/cm-html#_Toc244189219
+FIRST Championship playoff alliances roster this many teams, although only two play in a match. | What is 3? | Competition Manual §15.3, 3-Robot Alliances | https://ftc-resources.firstinspires.org/ftc/game/cm-html#_Toc244189251
+Game modifications will be published in or before the last regularly scheduled one of these | What is a Team Update? | Competition Manual §15.2, Game Modification, and Team Updates | https://ftc-resources.firstinspires.org/ftc/game/cm-html#_Toc244189250
 
 CATEGORY: Pollen and Nectar
-These smaller yellow balls are one of the two scoring elements | What is pollen? | Competition Manual §9.8, Scoring Elements | https://ftc-resources.firstinspires.org/ftc/game/cm-html#_Toc243582712
-These approximately 3.6-inch red and blue scoring balls share this game name. | What is nectar? | Competition Manual §9.8, Scoring Elements | https://ftc-resources.firstinspires.org/ftc/game/cm-html#_Toc243582712
-This is the color of every pollen | What is yellow? | Competition Manual §9.8, Scoring Elements | https://ftc-resources.firstinspires.org/ftc/game/cm-html#_Toc243582712
-A pollen is about this many inches in diameter | What is 2.8 inches? | Competition Manual §9.8, Scoring Elements | https://ftc-resources.firstinspires.org/ftc/game/cm-html#_Toc243582712
-A nectar is about this many inches in diameter | What is 3.6 inches? | Competition Manual §9.8, Scoring Elements | https://ftc-resources.firstinspires.org/ftc/game/cm-html#_Toc243582712
-This many pollen are used in one match | What is 40? | Competition Manual §9.8, Scoring Elements | https://ftc-resources.firstinspires.org/ftc/game/cm-html#_Toc243582712
-This many nectar of each color are used in one match | What is 8? | Competition Manual §9.8, Scoring Elements | https://ftc-resources.firstinspires.org/ftc/game/cm-html#_Toc243582712
+These smaller yellow balls are one of the two scoring elements | What is pollen? | Competition Manual §9.8, Scoring Elements | https://ftc-resources.firstinspires.org/ftc/game/cm-html#_Toc244189210
+These approximately 3.6-inch red and blue scoring balls share this game name. | What is nectar? | Competition Manual §9.8, Scoring Elements | https://ftc-resources.firstinspires.org/ftc/game/cm-html#_Toc244189210
+This is the color of every pollen | What is yellow? | Competition Manual §9.8, Scoring Elements | https://ftc-resources.firstinspires.org/ftc/game/cm-html#_Toc244189210
+A pollen is about this many inches in diameter | What is 2.8 inches? | Competition Manual §9.8, Scoring Elements | https://ftc-resources.firstinspires.org/ftc/game/cm-html#_Toc244189210
+A nectar is about this many inches in diameter | What is 3.6 inches? | Competition Manual §9.8, Scoring Elements | https://ftc-resources.firstinspires.org/ftc/game/cm-html#_Toc244189210
+This many pollen are used in one match | What is 40? | Competition Manual §9.8, Scoring Elements | https://ftc-resources.firstinspires.org/ftc/game/cm-html#_Toc244189210
+This many nectar of each color are used in one match | What is 8? | Competition Manual §9.8, Scoring Elements | https://ftc-resources.firstinspires.org/ftc/game/cm-html#_Toc244189210
 Each robot starts in contact with this many preloaded pollen | What is 4? | Competition Manual §10.3.1, Scoring Element setup | https://ftc-resources.firstinspires.org/ftc/game/cm-html#_Toc209089376
 Each flower starts with this many pollen inside it | What is 4? | Competition Manual §10.3.1, Scoring Element setup | https://ftc-resources.firstinspires.org/ftc/game/cm-html#_Toc209089376
 Each garden starts with this many pollen | What is 4? | Competition Manual §10.3.1, Scoring Element setup | https://ftc-resources.firstinspires.org/ftc/game/cm-html#_Toc209089376
 Each upward-facing cell starts with this many nectar of its color | What is 3? | Competition Manual §10.3.1, Scoring Element setup | https://ftc-resources.firstinspires.org/ftc/game/cm-html#_Toc209089376
 Each alliance area starts with this many nectar of its color | What is 5? | Competition Manual §10.3.1, Scoring Element setup | https://ftc-resources.firstinspires.org/ftc/game/cm-html#_Toc209089376
-Pollen and nectar are polyethylene balls sold under this Gopher product name | What is ResisDent? | Competition Manual §9.8, Scoring Elements | https://ftc-resources.firstinspires.org/ftc/game/cm-html#_Toc243582712
-The official pollen SKU am-5851_yellow identifies a ball of this color. | What is yellow? | Competition Manual §9.8, Scoring Elements | https://ftc-resources.firstinspires.org/ftc/game/cm-html#_Toc243582712
+Pollen and nectar are polyethylene balls sold under this Gopher product name | What is ResisDent? | Competition Manual §9.8, Scoring Elements | https://ftc-resources.firstinspires.org/ftc/game/cm-html#_Toc244189210
+The official pollen SKU am-5851_yellow identifies a ball of this color. | What is yellow? | Competition Manual §9.8, Scoring Elements | https://ftc-resources.firstinspires.org/ftc/game/cm-html#_Toc244189210
 If a robot is a no-show, its preload pollen is placed against the wall in this zone | What is the loading zone? | Competition Manual §10.3.1, Scoring Element setup | https://ftc-resources.firstinspires.org/ftc/game/cm-html#_Toc209089376
 
 CATEGORY: The Field
-The playing field is approximately this many feet on each side | What is 12 feet? | Competition Manual §9.2, Field | https://ftc-resources.firstinspires.org/ftc/game/cm-html#_Toc243582706
-The floor is made of these interlocking soft foam pieces | What are tiles? | Competition Manual §9.2, Field | https://ftc-resources.firstinspires.org/ftc/game/cm-html#_Toc243582706
-This many tiles make up the field floor | What is 36? | Competition Manual §9.2, Field | https://ftc-resources.firstinspires.org/ftc/game/cm-html#_Toc243582706
-Each tile is a square about this many inches long on each side | What is 24 inches? | Competition Manual §9.2, Field | https://ftc-resources.firstinspires.org/ftc/game/cm-html#_Toc243582706
-This many flowers are attached to the field walls | What is 4? | Competition Manual §9.7, Flower | https://ftc-resources.firstinspires.org/ftc/game/cm-html#_Toc243582711
-The hive structure sits in this part of the field | What is the center? | Competition Manual §9.6, Hive Structure | https://ftc-resources.firstinspires.org/ftc/game/cm-html#_Toc243582710
-Each alliance hive is made of this many cells | What is 2? | Competition Manual §9.6, Hive Structure | https://ftc-resources.firstinspires.org/ftc/game/cm-html#_Toc243582710
-The red and blue gardens sit in these parts of the field | What are opposite corners? | Competition Manual §16, Glossary: Garden | https://ftc-resources.firstinspires.org/ftc/game/cm-html#_Toc243582756
-This company sells the official full BIOBUZZ field as am-5850_Full. | What is AndyMark? | Competition Manual §9.2, Field | https://ftc-resources.firstinspires.org/ftc/game/cm-html#_Toc243582706
-Field measurements taken from the CAD model have a general tolerance of plus or minus this | What is 1 inch (2.5 cm)? | Competition Manual §9.1, Dimensions and Accuracy | https://ftc-resources.firstinspires.org/ftc/game/cm-html#_Toc243582705
+The playing field is approximately this many feet on each side | What is 12 feet? | Competition Manual §9.2, Field | https://ftc-resources.firstinspires.org/ftc/game/cm-html#_Toc244189204
+The floor is made of these interlocking soft foam pieces | What are tiles? | Competition Manual §9.2, Field | https://ftc-resources.firstinspires.org/ftc/game/cm-html#_Toc244189204
+This many tiles make up the field floor | What is 36? | Competition Manual §9.2, Field | https://ftc-resources.firstinspires.org/ftc/game/cm-html#_Toc244189204
+Each tile is a square about this many inches long on each side | What is 24 inches? | Competition Manual §9.2, Field | https://ftc-resources.firstinspires.org/ftc/game/cm-html#_Toc244189204
+This many flowers are attached to the field walls | What is 4? | Competition Manual §9.7, Flower | https://ftc-resources.firstinspires.org/ftc/game/cm-html#_Toc244189209
+The hive structure sits in this part of the field | What is the center? | Competition Manual §9.6, Hive Structure | https://ftc-resources.firstinspires.org/ftc/game/cm-html#_Toc244189208
+Each alliance hive is made of this many cells | What is 2? | Competition Manual §9.6, Hive Structure | https://ftc-resources.firstinspires.org/ftc/game/cm-html#_Toc244189208
+The red and blue gardens sit in these parts of the field | What are opposite corners? | Competition Manual §16, Glossary: Garden | https://ftc-resources.firstinspires.org/ftc/game/cm-html#_Toc244189254
+This company sells the official full BIOBUZZ field as am-5850_Full. | What is AndyMark? | Competition Manual §9.2, Field | https://ftc-resources.firstinspires.org/ftc/game/cm-html#_Toc244189204
+Field measurements taken from the CAD model have a general tolerance of plus or minus this | What is 1 inch (2.5 cm)? | Competition Manual §9.1, Dimensions and Accuracy | https://ftc-resources.firstinspires.org/ftc/game/cm-html#_Toc244189203
 Red robots must start fully on the side made of these field columns | What are columns A, B, and C? | Competition Manual §11, G304 ROBOTS must be set up correctly on the FIELD | https://ftc-resources.firstinspires.org/ftc/game/cm-html#G304
 Blue robots must start fully on the side made of these field columns | What are columns D, E, and F? | Competition Manual §11, G304 ROBOTS must be set up correctly on the FIELD. | https://ftc-resources.firstinspires.org/ftc/game/cm-html#G304
-A garden is approximately 23 inches long and this many inches wide. | What is 2 inches? | Competition Manual §16, Glossary: Garden | https://ftc-resources.firstinspires.org/ftc/game/cm-html#_Toc243582756
-A loading zone is approximately 23 inches wide by this many inches deep | What is 11 inches? | Competition Manual §9.3, Areas, Zones, & Markings | https://ftc-resources.firstinspires.org/ftc/game/cm-html#_Toc243582707
-From the audience, the red alliance area is on this side of the field | What is the left? | Competition Manual §9.5, Alliance Area | https://ftc-resources.firstinspires.org/ftc/game/cm-html#_Toc243582709
-An alliance area is approximately 97 inches wide and this many inches deep | What is 54 inches? | Competition Manual §9.3, Areas, Zones, and Markings | https://ftc-resources.firstinspires.org/ftc/game/cm-html#_Toc243582707
-Lines on the field are gaffer tape, either 1 inch wide or this many inches wide | What is 2 inches? | Competition Manual §9.3, Areas, Zones, and Markings | https://ftc-resources.firstinspires.org/ftc/game/cm-html#_Toc243582707
-The opening on top of a flower is about this high above the tiles | What is 21.5 inches? | Competition Manual §9.7, Flower | https://ftc-resources.firstinspires.org/ftc/game/cm-html#_Toc243582711
+A garden is approximately 23 inches long and this many inches wide. | What is 2 inches? | Competition Manual §16, Glossary: Garden | https://ftc-resources.firstinspires.org/ftc/game/cm-html#_Toc244189254
+A loading zone is approximately 23 inches wide by this many inches deep | What is 11 inches? | Competition Manual §9.3, Areas, Zones, & Markings | https://ftc-resources.firstinspires.org/ftc/game/cm-html#_Toc244189205
+From the audience, the red alliance area is on this side of the field | What is the left? | Competition Manual §9.5, Alliance Area | https://ftc-resources.firstinspires.org/ftc/game/cm-html#_Toc244189207
+An alliance area is approximately 97 inches wide and this many inches deep | What is 54 inches? | Competition Manual §9.3, Areas, Zones, and Markings | https://ftc-resources.firstinspires.org/ftc/game/cm-html#_Toc244189205
+Lines on the field are gaffer tape, either 1 inch wide or this many inches wide | What is 2 inches? | Competition Manual §9.3, Areas, Zones, and Markings | https://ftc-resources.firstinspires.org/ftc/game/cm-html#_Toc244189205
+The opening on top of a flower is about this high above the tiles | What is 21.5 inches? | Competition Manual §9.7, Flower | https://ftc-resources.firstinspires.org/ftc/game/cm-html#_Toc244189209
 A cell opening is approximately 20 inches wide by this many inches tall | What is 14 inches? | Competition Manual §9.6.2, Hive and Cell | https://ftc-resources.firstinspires.org/ftc/game/cm-html#HIVE
-At the Championship, and at some other events, the field is raised on these while the alliance areas stay on the floor | What are platforms or risers? | Competition Manual §9.2, Field | https://ftc-resources.firstinspires.org/ftc/game/cm-html#_Toc243582706
+At the Championship, and at some other events, the field is raised on these while the alliance areas stay on the floor | What are platforms or risers? | Competition Manual §9.2, Field | https://ftc-resources.firstinspires.org/ftc/game/cm-html#_Toc244189204
 
 CATEGORY: Match Clock
-AUTO lasts this many seconds | What is 30 seconds? | Competition Manual §10.4, Match Periods | https://ftc-resources.firstinspires.org/ftc/game/cm-html#_Toc243582720
-TELEOP lasts this long | What is 2 minutes? | Competition Manual §10.4, Match Periods | https://ftc-resources.firstinspires.org/ftc/game/cm-html#_Toc243582720
-The transition between AUTO and TELEOP lasts this many seconds | What is 8 seconds? | Competition Manual §10.4, Match Periods | https://ftc-resources.firstinspires.org/ftc/game/cm-html#_Toc243582720
-The match timer starts at this time | What is 2:30? | Competition Manual §9.11, Table 9-1 audio cues | https://ftc-resources.firstinspires.org/ftc/game/cm-html#_Toc243582715
+AUTO lasts this many seconds | What is 30 seconds? | Competition Manual §10.4, Match Periods | https://ftc-resources.firstinspires.org/ftc/game/cm-html#_Toc244189218
+TELEOP lasts this long | What is 2 minutes? | Competition Manual §10.4, Match Periods | https://ftc-resources.firstinspires.org/ftc/game/cm-html#_Toc244189218
+The transition between AUTO and TELEOP lasts this many seconds | What is 8 seconds? | Competition Manual §10.4, Match Periods | https://ftc-resources.firstinspires.org/ftc/game/cm-html#_Toc244189218
+The match timer starts at this time | What is 2:30? | Competition Manual §9.11, Table 9-1 audio cues | https://ftc-resources.firstinspires.org/ftc/game/cm-html#_Toc244189213
 Nectar may not enter a flower until the timer reaches this | What is 1:00? | Competition Manual §11, G410, and Table 9-1 | https://ftc-resources.firstinspires.org/ftc/game/cm-html#G410
-At 1:00, flower ownership unlocks and the field plays this sound | What is a chime? | Competition Manual §9.11, Table 9-1 | https://ftc-resources.firstinspires.org/ftc/game/cm-html#_Toc243582715
-The train whistle plays when this much time is left | What is 20 seconds? | Competition Manual §9.11, Table 9-1 audio cues | https://ftc-resources.firstinspires.org/ftc/game/cm-html#_Toc243582715
-This sound marks a match that has been stopped | What is a foghorn? | Competition Manual §9.11, Table 9-1 audio cues | https://ftc-resources.firstinspires.org/ftc/game/cm-html#_Toc243582715
-TELEOP begins with this many bells as its audio cue | What is 3? | Competition Manual §9.11, Table 9-1 audio cues | https://ftc-resources.firstinspires.org/ftc/game/cm-html#_Toc243582715
-AUTO ends with a buzzer played this many times | What is 3? | Competition Manual §9.11, Table 9-1 audio cues | https://ftc-resources.firstinspires.org/ftc/game/cm-html#_Toc243582715
-If an audio cue and the field timer disagree, this one is official | What is the visual field timer? | Competition Manual §9.11, Event Management System | https://ftc-resources.firstinspires.org/ftc/game/cm-html#_Toc243582715
+At 1:00, flower ownership unlocks and the field plays this sound | What is a chime? | Competition Manual §9.11, Table 9-1 | https://ftc-resources.firstinspires.org/ftc/game/cm-html#_Toc244189213
+The train whistle plays when this much time is left | What is 20 seconds? | Competition Manual §9.11, Table 9-1 audio cues | https://ftc-resources.firstinspires.org/ftc/game/cm-html#_Toc244189213
+This sound marks a match that has been stopped | What is a foghorn? | Competition Manual §9.11, Table 9-1 audio cues | https://ftc-resources.firstinspires.org/ftc/game/cm-html#_Toc244189213
+TELEOP begins with this many bells as its audio cue | What is 3? | Competition Manual §9.11, Table 9-1 audio cues | https://ftc-resources.firstinspires.org/ftc/game/cm-html#_Toc244189213
+AUTO ends with a buzzer played this many times | What is 3? | Competition Manual §9.11, Table 9-1 audio cues | https://ftc-resources.firstinspires.org/ftc/game/cm-html#_Toc244189213
+If an audio cue and the field timer disagree, this one is official | What is the visual field timer? | Competition Manual §9.11, Event Management System | https://ftc-resources.firstinspires.org/ftc/game/cm-html#_Toc244189213
 During the 8-second transition, robots may not make this kind of movement | What is powered movement? | Competition Manual §11, G403 | https://ftc-resources.firstinspires.org/ftc/game/cm-html#G403
-From 8 seconds to 1 second before TELEOP, the cue tells drivers to pick up these | What are their controllers? | Competition Manual §9.11, Table 9-1 audio cues | https://ftc-resources.firstinspires.org/ftc/game/cm-html#_Toc243582715
-This audio cue plays at the 0:00 timer value to signal the end of the MATCH. | What is the buzzer? | Competition Manual §9.11, Table 9-1 | https://ftc-resources.firstinspires.org/ftc/game/cm-html#_Toc243582715
+From 8 seconds to 1 second before TELEOP, the cue tells drivers to pick up these | What are their controllers? | Competition Manual §9.11, Table 9-1 audio cues | https://ftc-resources.firstinspires.org/ftc/game/cm-html#_Toc244189213
+This audio cue plays at the 0:00 timer value to signal the end of the MATCH. | What is the buzzer? | Competition Manual §9.11, Table 9-1 | https://ftc-resources.firstinspires.org/ftc/game/cm-html#_Toc244189213
 Continuing powered robot movement after 0:00 violates the rule requiring robots to do this. | What is stop or be motionless? | Competition Manual §11, G404 | https://ftc-resources.firstinspires.org/ftc/game/cm-html#G404
 
 CATEGORY: Scoring
@@ -140,13 +140,13 @@ Having the bottom-most scoring nectar in a flower earns its alliance this many b
 A flower belongs to the alliance whose color matches the scoring nectar in this relative position. | What is the top-most nectar? | Competition Manual §10.5.2, Flower owner | https://ftc-resources.firstinspires.org/ftc/game/cm-html#_Ref237946722
 Red nectar is the lowest scoring nectar in a flower, but blue owns the flower. This alliance earns the bottom nectar bonus. | What is red? | Competition Manual §10.5.2, Bottom Nectar Bonus | https://ftc-resources.firstinspires.org/ftc/game/cm-html#_Ref237946722
 A garden scores for the alliance that matches this, no matter who placed the pieces | What is the garden's color? | Competition Manual §10.5.3, Garden scoring | https://ftc-resources.firstinspires.org/ftc/game/cm-html#_Toc209089384
-Points for pieces left in a cell are counted only in the cell facing this direction | What is upward? | Competition Manual §10.5, pollen and nectar remaining in a cell | https://ftc-resources.firstinspires.org/ftc/game/cm-html#_Toc243582721
-A hive tip that finishes before TELEOP starts is scored as part of this period | What is AUTO? | Competition Manual §10.5, when achievements are assessed | https://ftc-resources.firstinspires.org/ftc/game/cm-html#_Toc243582721
-A tip counts when the hive changes stable states and this part begins to touch the frame | What is the damper? | Competition Manual §10.5, Hive Tip | https://ftc-resources.firstinspires.org/ftc/game/cm-html#_Toc243582721
+Points for pieces left in a cell are counted only in the cell facing this direction | What is upward? | Competition Manual §10.5, pollen and nectar remaining in a cell | https://ftc-resources.firstinspires.org/ftc/game/cm-html#_Toc244189219
+A hive tip that finishes before TELEOP starts is scored as part of this period | What is AUTO? | Competition Manual §10.5, when achievements are assessed | https://ftc-resources.firstinspires.org/ftc/game/cm-html#_Toc244189219
+A tip counts when the hive changes stable states and this part begins to touch the frame | What is the damper? | Competition Manual §10.5, Hive Tip | https://ftc-resources.firstinspires.org/ftc/game/cm-html#_Toc244189219
 The flower scoring volume extends from the top ring down to this ring. | What is the middle ring? | Competition Manual §10.5.2, Flower scoring | https://ftc-resources.firstinspires.org/ftc/game/cm-html#_Ref237946722
 At final scoring a ball partly inside your alliance's Garden earns this many points. | What is 1? | Competition Manual §10.5.3, Garden scoring | https://ftc-resources.firstinspires.org/ftc/game/cm-html#_Toc209089384
-LEAVE and the first PARK assessment occur at the end of this 30-second period. | What is AUTO? | Competition Manual §10.5, when achievements are assessed | https://ftc-resources.firstinspires.org/ftc/game/cm-html#_Toc243582721
-Garden scoring is finalized after robots and balls come to rest following this driver-controlled period. | What is TELEOP? | Competition Manual §10.5, when achievements are assessed | https://ftc-resources.firstinspires.org/ftc/game/cm-html#_Toc243582721
+LEAVE and the first PARK assessment occur at the end of this 30-second period. | What is AUTO? | Competition Manual §10.5, when achievements are assessed | https://ftc-resources.firstinspires.org/ftc/game/cm-html#_Toc244189219
+Garden scoring is finalized after robots and balls come to rest following this driver-controlled period. | What is TELEOP? | Competition Manual §10.5, when achievements are assessed | https://ftc-resources.firstinspires.org/ftc/game/cm-html#_Toc244189219
 A robot touching the perimeter wall at the end of AUTO, even inside the loading zone, does not earn these points | What are LEAVE points? | Competition Manual §10.5.4 ROBOT Scoring Criteria | https://game-qa.firstinspires.org/boards/2027/FTC/QA/qa/21
 
 CATEGORY: Ranking Points
@@ -158,13 +158,13 @@ At an event other than a Regional Championship, FIRST Championship, or a Premier
 At an event other than a Regional Championship, FIRST Championship, or a Premier Event with its own thresholds, Pollinator 2 requires at least this many tips | What is 7? | Competition Manual §10.5.5, Table 10-3 thresholds | https://ftc-resources.firstinspires.org/ftc/game/cm-html#_Toc209089385
 Each individual SWARM, POLLINATOR 1, or POLLINATOR 2 at or above threshold earns this many ranking points. | What is 1? | Competition Manual §10.5.5, Table 10-2 ranking points | https://ftc-resources.firstinspires.org/ftc/game/cm-html#_Toc209089385
 Tying the match is worth this many ranking points | What is 1? | Competition Manual §10.5.5, Table 10-2 ranking points | https://ftc-resources.firstinspires.org/ftc/game/cm-html#_Toc209089385
-Qualification rank is based on a team's average of these | What are ranking points? | Competition Manual §16, Glossary: Ranking Score | https://ftc-resources.firstinspires.org/ftc/game/cm-html#_Toc243582756
-A team disqualified in a qualification match receives this many ranking points for that match | What is 0? | Competition Manual §10.6, Disqualified | https://ftc-resources.firstinspires.org/ftc/game/cm-html#_Toc243582722
+Qualification rank is based on a team's average of these | What are ranking points? | Competition Manual §16, Glossary: Ranking Score | https://ftc-resources.firstinspires.org/ftc/game/cm-html#_Toc244189254
+A team disqualified in a qualification match receives this many ranking points for that match | What is 0? | Competition Manual §10.6, Disqualified | https://ftc-resources.firstinspires.org/ftc/game/cm-html#_Toc244189220
 These published season documents announce Regional Championship ranking-point thresholds. | What are Team Updates? | Competition Manual §10.5.5, Table 10-3 thresholds | https://ftc-resources.firstinspires.org/ftc/game/cm-html#_Toc209089385
 Premier events are allowed to choose their own versions of these | What are ranking point thresholds? | Competition Manual §10.5.5, ranking point thresholds | https://ftc-resources.firstinspires.org/ftc/game/cm-html#_Toc209089385
 Swarm adds leave points together with these points | What are park points? | Competition Manual §10.5.5, Swarm ranking point | https://ftc-resources.firstinspires.org/ftc/game/cm-html#_Toc209089385
 Tips from both AUTO and TELEOP count toward these ranking points | What are Pollinator ranking points? | Competition Manual §10.5.5, Pollinator ranking points | https://ftc-resources.firstinspires.org/ftc/game/cm-html#_Toc209089385
-Ranking points are awarded from results in this phase of the event | What is the qualification phase? | Competition Manual §10.5, Scoring | https://ftc-resources.firstinspires.org/ftc/game/cm-html#_Toc243582721
+Ranking points are awarded from results in this phase of the event | What is the qualification phase? | Competition Manual §10.5, Scoring | https://ftc-resources.firstinspires.org/ftc/game/cm-html#_Toc244189219
 When ranking scores tie, the next comparison is average alliance match points not counting these | What are fouls? | Competition Manual §13.6.3, Table 13-1 | https://ftc-resources.firstinspires.org/ftc/game/cm-html#_Ref174527872
 The third ranking comparison is the average number of these | What are TIPS? | Competition Manual §13.6.3, Table 13-1 | https://ftc-resources.firstinspires.org/ftc/game/cm-html#_Ref174527872
 The fourth ranking comparison is average points from this period | What is AUTO? | Competition Manual §13.6.3, Table 13-1 | https://ftc-resources.firstinspires.org/ftc/game/cm-html#_Ref174527872
@@ -172,13 +172,13 @@ An asterisk marks an extra appearance whose outcome does not affect that team's 
 FIRST will not add a new achievement that earns these | What are ranking points? | Q&A 14, Section 10.5.5 | https://game-qa.firstinspires.org/boards/2027/FTC/QA/qa/14
 
 CATEGORY: Drive Team
-A drive team may include at most this many people | What is 4? | Competition Manual §10.2, Drive Team | https://ftc-resources.firstinspires.org/ftc/game/cm-html#_Toc243582718
-A drive team may include at most this many drivers | What is 2? | Competition Manual §10.2, Table 10-1 | https://ftc-resources.firstinspires.org/ftc/game/cm-html#_Toc243582718
-This drive team role is a guide or advisor and may be an adult | What is the drive coach? | Competition Manual §10.2, Table 10-1 | https://ftc-resources.firstinspires.org/ftc/game/cm-html#_Toc243582718
-This student role manages scoring elements | What is the human player? | Competition Manual §10.2, Table 10-1 | https://ftc-resources.firstinspires.org/ftc/game/cm-html#_Toc243582718
-At most this many drive team members may be non-students | What is 1? | Competition Manual §10.2, Drive Team | https://ftc-resources.firstinspires.org/ftc/game/cm-html#_Toc243582718
-The drive coach must wear a badge that says this | What is DRIVE COACH? | Competition Manual §10.2, Table 10-1 | https://ftc-resources.firstinspires.org/ftc/game/cm-html#_Toc243582718
-Each driver must wear a badge that says this | What is DRIVE TEAM? | Competition Manual §10.2, Table 10-1 | https://ftc-resources.firstinspires.org/ftc/game/cm-html#_Toc243582718
+A drive team may include at most this many people | What is 4? | Competition Manual §10.2, Drive Team | https://ftc-resources.firstinspires.org/ftc/game/cm-html#_Toc244189216
+A drive team may include at most this many drivers | What is 2? | Competition Manual §10.2, Table 10-1 | https://ftc-resources.firstinspires.org/ftc/game/cm-html#_Toc244189216
+This drive team role is a guide or advisor and may be an adult | What is the drive coach? | Competition Manual §10.2, Table 10-1 | https://ftc-resources.firstinspires.org/ftc/game/cm-html#_Toc244189216
+This student role manages scoring elements | What is the human player? | Competition Manual §10.2, Table 10-1 | https://ftc-resources.firstinspires.org/ftc/game/cm-html#_Toc244189216
+At most this many drive team members may be non-students | What is 1? | Competition Manual §10.2, Drive Team | https://ftc-resources.firstinspires.org/ftc/game/cm-html#_Toc244189216
+The drive coach must wear a badge that says this | What is DRIVE COACH? | Competition Manual §10.2, Table 10-1 | https://ftc-resources.firstinspires.org/ftc/game/cm-html#_Toc244189216
+Each driver must wear a badge that says this | What is DRIVE TEAM? | Competition Manual §10.2, Table 10-1 | https://ftc-resources.firstinspires.org/ftc/game/cm-html#_Toc244189216
 In a playoff match, this student must display a special identifier such as a hat or armband | Who is the alliance captain? | Competition Manual §10.3.2, Drive Teams | https://ftc-resources.firstinspires.org/ftc/game/cm-html#_Toc209089377
 If alliance partners cannot agree where their drive team members will stand, the team listed on the match schedule as this will stand closest to the audience. | What is Red 1 or Blue 1? | Competition Manual §10.3.2, Drive Teams | https://ftc-resources.firstinspires.org/ftc/game/cm-html#_Toc209089377
 Once the match starts, the drive coach may not handle these | What are the gamepads? | Competition Manual §11, G423 | https://ftc-resources.firstinspires.org/ftc/game/cm-html#G423
@@ -186,7 +186,7 @@ Nectar entered by a human must first touch a tile inside this zone | What is the
 Humans may not use one of these when they put nectar onto the field | What is a tool? | Competition Manual §11, G427 | https://ftc-resources.firstinspires.org/ftc/game/cm-html#G427
 Before the one-minute mark, each hive tip lets that alliance enter this many additional nectar | What is 1? | Competition Manual §11, G426 | https://ftc-resources.firstinspires.org/ftc/game/cm-html#G426
 Once the match starts, the drive team must stay inside this taped space | What is their alliance area? | Competition Manual §11, G422 DRIVE TEAM stays in the ALLIANCE AREA | https://ftc-resources.firstinspires.org/ftc/game/cm-html#G422
-A drive coach may not touch pollen or nectar except for this reason | What is safety purposes? | Competition Manual §11, drive coach and scoring elements G424 | https://ftc-resources.firstinspires.org/ftc/game/cm-html#_Toc243582725
+A drive coach may not touch pollen or nectar except for this reason | What is safety purposes? | Competition Manual §11, drive coach and scoring elements G424 | https://ftc-resources.firstinspires.org/ftc/game/cm-html#G424
 A drive coach may hold the driver station, choose OpModes, and press init, start, or this | What is stop? | Competition Manual §11, G423 DRIVE COACHES and other teams: hands off the controls | https://ftc-resources.firstinspires.org/ftc/game/cm-html#G423
 Drive team members may not do this to pollen or nectar that are still on the field | What is remove them? | Competition Manual §11.4.6, Humans, don't remove SCORING ELEMENTS from the FIELD (Rule G428) | https://ftc-resources.firstinspires.org/ftc/game/cm-html#G428
 
@@ -217,26 +217,26 @@ The pin count pauses when the robots are at least this far apart. | What is 2 fe
 A robot may remove only pollen, and only from this part of a flower | What is the bottom? | Competition Manual §11, G418 | https://ftc-resources.firstinspires.org/ftc/game/cm-html#G418
 Pollen and nectar may be scored in a flower only by entering through this part | What is the top? | Competition Manual §11, G418 | https://ftc-resources.firstinspires.org/ftc/game/cm-html#G418
 Putting nectar into a flower too early is penalized as this, once per nectar | What is a major foul? | Competition Manual §11, G410 | https://ftc-resources.firstinspires.org/ftc/game/cm-html#G410
-Pushing a ball that is simply in the robot's path is called bulldozing, and it is not this | What is control? | Competition Manual Section 16 Glossary | https://ftc-resources.firstinspires.org/ftc/game/cm-html#_Toc243582756
-Launching at a downward-facing cell while the hive is moving can keep this from counting | What is the tip? | Competition Manual §10.5, Hive Tip | https://ftc-resources.firstinspires.org/ftc/game/cm-html#_Toc243582721
+Pushing a ball that is simply in the robot's path is called bulldozing, and it is not this | What is control? | Competition Manual Section 16 Glossary | https://ftc-resources.firstinspires.org/ftc/game/cm-html#_Toc244189254
+Launching at a downward-facing cell while the hive is moving can keep this from counting | What is the tip? | Competition Manual §10.5, Hive Tip | https://ftc-resources.firstinspires.org/ftc/game/cm-html#_Toc244189219
 Strategically denying opponents access to scoring elements is called this. | What is hoarding? | Competition Manual G411, Do not hoard SCORING ELEMENTS | https://ftc-resources.firstinspires.org/ftc/game/cm-html#G411
 Controlling a fifth scoring element is a violation, resulting in this if the referees perceive the action as non-strategic | What is a verbal warning? | Q&A 3, G407 | https://game-qa.firstinspires.org/boards/2027/FTC/QA/qa/3
 Repeating that fifth-piece control is likely called strategic, even with a sorter that keeps 4 and does this to the rest | What is discard them? | Competition Manual G407 | https://ftc-resources.firstinspires.org/ftc/game/cm-html#G407
 If the robot controls the opponent's nectar and the violation is called strategic, the penalty is this instead of a major foul. | What is a yellow card? | Competition Manual §11, G408 | https://ftc-resources.firstinspires.org/ftc/game/cm-html#G408
 
 CATEGORY: Fouls and Cards
-A minor foul credits the opponent with this many match points | What is 5? | Competition Manual §10.6, Minor Foul | https://ftc-resources.firstinspires.org/ftc/game/cm-html#_Toc243582722
-A major foul credits the opponent with this many match points | What is 20? | Competition Manual §10.6, Major Foul | https://ftc-resources.firstinspires.org/ftc/game/cm-html#_Toc243582722
-This card is a warning for egregious robot or team behavior | What is a yellow card? | Competition Manual §10.6, Yellow Card | https://ftc-resources.firstinspires.org/ftc/game/cm-html#_Toc243582722
+A minor foul credits the opponent with this many match points | What is 5? | Competition Manual §10.6, Minor Foul | https://ftc-resources.firstinspires.org/ftc/game/cm-html#_Toc244189220
+A major foul credits the opponent with this many match points | What is 20? | Competition Manual §10.6, Major Foul | https://ftc-resources.firstinspires.org/ftc/game/cm-html#_Toc244189220
+This card is a warning for egregious robot or team behavior | What is a yellow card? | Competition Manual §10.6, Yellow Card | https://ftc-resources.firstinspires.org/ftc/game/cm-html#_Toc244189220
 Yellow cards are additive, meaning that a second yellow card is automatically converted to this. | What is a red card? | Competition Manual §10.6.1, Yellow and Red Cards | https://ftc-resources.firstinspires.org/ftc/game/cm-html#_YELLOW_and_RED_1
-A red card leaves the team in this state for that match | What is disqualified? | Competition Manual §10.6, Red Card | https://ftc-resources.firstinspires.org/ftc/game/cm-html#_Toc243582722
-In a qualification match, a disqualified team receives this many match points and ranking points | What is 0? | Competition Manual §10.6, Disqualified | https://ftc-resources.firstinspires.org/ftc/game/cm-html#_Toc243582722
-Momentary describes durations that are fewer than approximately this many seconds. | What is 3 seconds? | Competition Manual §10.6, Momentary | https://ftc-resources.firstinspires.org/ftc/game/cm-html#_Toc243582722
-Continuous describes durations that are more than approximately this many seconds. | What is 10 seconds? | Competition Manual §10.6, Continuous | https://ftc-resources.firstinspires.org/ftc/game/cm-html#_Toc243582722
-To dispute a match ruling, teams may not ask event staff to review this kind of recorded moving-image evidence. | What is video? | Competition Manual §10.7, Head Referee | https://ftc-resources.firstinspires.org/ftc/game/cm-html#_Toc243582723
+A red card leaves the team in this state for that match | What is disqualified? | Competition Manual §10.6, Red Card | https://ftc-resources.firstinspires.org/ftc/game/cm-html#_Toc244189220
+In a qualification match, a disqualified team receives this many match points and ranking points | What is 0? | Competition Manual §10.6, Disqualified | https://ftc-resources.firstinspires.org/ftc/game/cm-html#_Toc244189220
+Momentary describes durations that are fewer than approximately this many seconds. | What is 3 seconds? | Competition Manual §10.6, Momentary | https://ftc-resources.firstinspires.org/ftc/game/cm-html#_Toc244189220
+Continuous describes durations that are more than approximately this many seconds. | What is 10 seconds? | Competition Manual §10.6, Continuous | https://ftc-resources.firstinspires.org/ftc/game/cm-html#_Toc244189220
+To dispute a match ruling, teams may not ask event staff to review this kind of recorded moving-image evidence. | What is video? | Competition Manual §10.7, Head Referee | https://ftc-resources.firstinspires.org/ftc/game/cm-html#_Toc244189221
 During playoff matches, a yellow or red card is assigned to this entire group | What is the alliance? | Competition Manual §10.6.3, cards in playoffs | https://ftc-resources.firstinspires.org/ftc/game/cm-html#_Toc205155320
-The manual uses this word for an action done to gain a competitive advantage | What is strategic? | Competition Manual §10.6, Strategic | https://ftc-resources.firstinspires.org/ftc/game/cm-html#_Toc243582722
-The manual uses this word for an action that happens more than once in the same match | What is repeated? | Competition Manual §10.6, Repeated | https://ftc-resources.firstinspires.org/ftc/game/cm-html#_Toc243582722
+The manual uses this word for an action done to gain a competitive advantage | What is strategic? | Competition Manual §10.6, Strategic | https://ftc-resources.firstinspires.org/ftc/game/cm-html#_Toc244189220
+The manual uses this word for an action that happens more than once in the same match | What is repeated? | Competition Manual §10.6, Repeated | https://ftc-resources.firstinspires.org/ftc/game/cm-html#_Toc244189220
 
 CATEGORY: Awards
 This is the most prestigious all-around judged award | What is the Inspire Award? | Competition Manual §6.3.1, Inspire Award | https://ftc-resources.firstinspires.org/ftc/game/cm-html#_Toc205155272
@@ -263,17 +263,17 @@ CATEGORY: FIRST Spirit
 This is part of the FIRST ethos and a way of doing things that encourages high-quality work, emphasizes the value of others, and respects individuals and the community. | What is Gracious Professionalism? | Competition Manual §1.3.1, Gracious Professionalism | https://ftc-resources.firstinspires.org/ftc/game/cm-html#_Toc205155235
 This FIRST idea means helping other teams even when you are competing against them | What is Coopertition? | Competition Manual §1.3.2, Coopertition | https://ftc-resources.firstinspires.org/ftc/game/cm-html#_Toc205155236
 He coined the term Gracious Professionalism | Who is Dr. Woodie Flowers? | Competition Manual §1.3.1, Gracious Professionalism | https://ftc-resources.firstinspires.org/ftc/game/cm-html#_Toc205155235
-This three-word FIRST slogan emphasizes the life skills teams gain beyond building machines. | What is More Than Robots? | Competition Manual §1.1, About FIRST | https://ftc-resources.firstinspires.org/ftc/game/cm-html#_Toc243582672
-Deliberately throwing a match violates this agreement in the manual | What is the Competition Integrity Contract? | Competition Manual §1.5, Competition Integrity Contract | https://ftc-resources.firstinspires.org/ftc/game/cm-html#_Toc243582676
-The letters in FIRST stand for For Inspiration and Recognition of Science and this | What is Technology? | Competition Manual §1.1, About FIRST | https://ftc-resources.firstinspires.org/ftc/game/cm-html#_Toc243582672
+This three-word FIRST slogan emphasizes the life skills teams gain beyond building machines. | What is More Than Robots? | Competition Manual §1.1, About FIRST | https://ftc-resources.firstinspires.org/ftc/game/cm-html#_Toc244189170
+Deliberately throwing a match violates this agreement in the manual | What is the Competition Integrity Contract? | Competition Manual §1.5, Competition Integrity Contract | https://ftc-resources.firstinspires.org/ftc/game/cm-html#_Toc244189174
+The letters in FIRST stand for For Inspiration and Recognition of Science and this | What is Technology? | Competition Manual §1.1, About FIRST | https://ftc-resources.firstinspires.org/ftc/game/cm-html#_Toc244189170
 
 CATEGORY: Power and Control
 A robot may contain only this many main batteries | What is 1? | Competition Manual §12, R601 ROBOTS can contain only 1 main battery | https://ftc-resources.firstinspires.org/ftc/game/cm-html#R601
 The legal main battery voltage | What is 12 volts? | Competition Manual §12, R601 main battery | https://ftc-resources.firstinspires.org/ftc/game/cm-html#R601
 The legal main battery chemistry | What is nickel-metal hydride (NiMH)? | Competition Manual §12, R601 main battery | https://ftc-resources.firstinspires.org/ftc/game/cm-html#R601
 The main battery fuse must be this many amps | What is 20 amps? | Competition Manual §12, R601 main battery | https://ftc-resources.firstinspires.org/ftc/game/cm-html#R601
-The four tags on one cell are printed together as this | What is an AprilTag cluster? | Competition Manual §9.9, AprilTags | https://ftc-resources.firstinspires.org/ftc/game/cm-html#_Toc243582713
-BIOBUZZ AprilTag clusters are mounted on this face of each cell. | What is the bottom face? | Competition Manual §9.9, AprilTags | https://ftc-resources.firstinspires.org/ftc/game/cm-html#_Toc243582713
+The four tags on one cell are printed together as this | What is an AprilTag cluster? | Competition Manual §9.9, AprilTags | https://ftc-resources.firstinspires.org/ftc/game/cm-html#_Toc244189211
+BIOBUZZ AprilTag clusters are mounted on this face of each cell. | What is the bottom face? | Competition Manual §9.9, AprilTags | https://ftc-resources.firstinspires.org/ftc/game/cm-html#_Toc244189211
 A robot may not carry images that copy or closely mimic these navigation targets | What are AprilTags? | Competition Manual §12, R202 | https://ftc-resources.firstinspires.org/ftc/game/cm-html#R202
 A custom circuit may not supply regulated power above this voltage unless it only powers LEDs | What is 5 volts? | Competition Manual §12, R607 | https://ftc-resources.firstinspires.org/ftc/game/cm-html#R607
 The robot controller's Wi-Fi name should end with these characters | What is -RC? | Competition Manual R705, Configure devices for your team number | https://ftc-resources.firstinspires.org/ftc/game/cm-html#R705
@@ -282,49 +282,49 @@ Software may not send this kind of live picture from the robot over Wi-Fi during
 This Limelight is the programmable vision coprocessor the manual allows teams to reprogram | What is the Limelight 3A? | Competition Manual §12, R702, Table 12-9 | https://ftc-resources.firstinspires.org/ftc/game/cm-html#R702
 
 CATEGORY: Field Staff
-This volunteer has the final say on match scores, fouls, and cards | Who is the Head Referee? | Competition Manual §9.10, Field Staff | https://ftc-resources.firstinspires.org/ftc/game/cm-html#_Toc243582714
-This volunteer checks whether a robot and its parts are legal | Who is an inspector? | Competition Manual §16, Glossary: Inspector | https://ftc-resources.firstinspires.org/ftc/game/cm-html#_Toc243582756
-These volunteers decide which teams receive judged awards | Who are the judges? | Competition Manual §6, Awards (A) | https://ftc-resources.firstinspires.org/ftc/game/cm-html#_Toc243582695
-This person trains and supervises judges but does not pick the winners | Who is the Judge Advisor? | Competition Manual §6.1, Judge Advisor | https://ftc-resources.firstinspires.org/ftc/game/cm-html#_Toc243582696
-Pollen that leaves the field is put back on the field by these people | Who are field staff? | Competition Manual §10.8.2, Scoring Element logistics | https://ftc-resources.firstinspires.org/ftc/game/cm-html#_Toc243582724
-Drive teams should alert the field staff to any missing, incorrectly placed, or damaged scoring elements prior to this moment. | What is the start of the match? | Competition Manual §10.8.2, Scoring Element logistics | https://ftc-resources.firstinspires.org/ftc/game/cm-html#_Toc243582724
-Damaged scoring elements stay in play and are not replaced until this | What is the next match reset? | Competition Manual §10.8.2, Scoring Element logistics | https://ftc-resources.firstinspires.org/ftc/game/cm-html#_Toc243582724
+This volunteer has the final say on match scores, fouls, and cards | Who is the Head Referee? | Competition Manual §9.10, Field Staff | https://ftc-resources.firstinspires.org/ftc/game/cm-html#_Toc244189212
+This volunteer checks whether a robot and its parts are legal | Who is an inspector? | Competition Manual §16, Glossary: Inspector | https://ftc-resources.firstinspires.org/ftc/game/cm-html#_Toc244189254
+These volunteers decide which teams receive judged awards | Who are the judges? | Competition Manual §6, Awards (A) | https://ftc-resources.firstinspires.org/ftc/game/cm-html#_Toc244189193
+This person trains and supervises judges but does not pick the winners | Who is the Judge Advisor? | Competition Manual §6.1, Judge Advisor | https://ftc-resources.firstinspires.org/ftc/game/cm-html#_Toc244189194
+Pollen that leaves the field is put back on the field by these people | Who are field staff? | Competition Manual §10.8.2, Scoring Element logistics | https://ftc-resources.firstinspires.org/ftc/game/cm-html#_Toc244189222
+Drive teams should alert the field staff to any missing, incorrectly placed, or damaged scoring elements prior to this moment. | What is the start of the match? | Competition Manual §10.8.2, Scoring Element logistics | https://ftc-resources.firstinspires.org/ftc/game/cm-html#_Toc244189222
+Damaged scoring elements stay in play and are not replaced until this | What is the next match reset? | Competition Manual §10.8.2, Scoring Element logistics | https://ftc-resources.firstinspires.org/ftc/game/cm-html#_Toc244189222
 
 CATEGORY: Hive and Flowers
 An easy way to remember the starting tilt: the cell that points at a flower begins facing this way | What is down? | Competition Manual §10.3.1, Scoring Element setup | https://ftc-resources.firstinspires.org/ftc/game/cm-html#_Toc209089376
-AprilTag clusters let a robot tell which way this structure is tipped | What is the hive? | Competition Manual §9.9, AprilTags | https://ftc-resources.firstinspires.org/ftc/game/cm-html#_Toc243582713
-Under G418, robots may remove only this scoring-element type from a flower's bottom. | What is pollen? | Competition Manual §9.7, Flower | https://ftc-resources.firstinspires.org/ftc/game/cm-html#_Toc243582711
+AprilTag clusters let a robot tell which way this structure is tipped | What is the hive? | Competition Manual §9.9, AprilTags | https://ftc-resources.firstinspires.org/ftc/game/cm-html#_Toc244189211
+Under G418, robots may remove only this scoring-element type from a flower's bottom. | What is pollen? | Competition Manual §9.7, Flower | https://ftc-resources.firstinspires.org/ftc/game/cm-html#_Toc244189209
 With 60 seconds left, an alliance may enter all of these that are still off the field | What is its remaining nectar? | Competition Manual §11, G426 | https://ftc-resources.firstinspires.org/ftc/game/cm-html#G426
 A robot puts nectar into the flower scoring volume at 1:05. Each nectar incurs this type of penalty even if it later scores. | What is a major foul? | Competition Manual §10.5.2, Flower scoring | https://ftc-resources.firstinspires.org/ftc/game/cm-html#_Ref237946722
 Either alliance's nectar can score in your garden, and so can this other piece | What is pollen? | Competition Manual §10.5.3, Garden scoring | https://ftc-resources.firstinspires.org/ftc/game/cm-html#_Toc209089384
 NECTAR in this position awards Flower ownership. | What is the top most NECTAR? | Competition Manual §10.5.2, Flower owner | https://ftc-resources.firstinspires.org/ftc/game/cm-html#_Ref237946722
-Besides pollen, launching these larger balls into the upward-facing cell can tip the hive | What is nectar? | Competition Manual §9.8, Scoring Elements | https://ftc-resources.firstinspires.org/ftc/game/cm-html#_Toc243582712
-The opening on top of a flower is about this many inches in diameter | What is 4 inches? | Competition Manual §9.7, Flower | https://ftc-resources.firstinspires.org/ftc/game/cm-html#_Toc243582711
+Besides pollen, launching these larger balls into the upward-facing cell can tip the hive | What is nectar? | Competition Manual §9.8, Scoring Elements | https://ftc-resources.firstinspires.org/ftc/game/cm-html#_Toc244189210
+The opening on top of a flower is about this many inches in diameter | What is 4 inches? | Competition Manual §9.7, Flower | https://ftc-resources.firstinspires.org/ftc/game/cm-html#_Toc244189209
 
 CATEGORY: Starting Setup
 A robot must start the match touching this | What is the perimeter wall? | Competition Manual §11, G304 | https://ftc-resources.firstinspires.org/ftc/game/cm-html#G304
-A robot may not start inside this zone, even though parking there scores later | What is the loading zone? | Competition Manual §11, robot setup | https://ftc-resources.firstinspires.org/ftc/game/cm-html#_Toc243582725
+A robot may not start inside this zone, even though parking there scores later | What is the loading zone? | Competition Manual §11, robot setup | https://ftc-resources.firstinspires.org/ftc/game/cm-html#_Toc244189223
 A robot may not start while touching one of these, or inside its scoring volume | What is a FLOWER? | Competition Manual G304, ROBOTS must be set up correctly on the FIELD | https://ftc-resources.firstinspires.org/ftc/game/cm-html#G304
 Teams show they are ready by choosing an OpMode and pressing this | What is INIT? | Competition Manual §11, G305 | https://ftc-resources.firstinspires.org/ftc/game/cm-html#G305
 A team that will not run autonomous still has to initialize one of these | What is an OpMode? | Competition Manual §11, G305 | https://ftc-resources.firstinspires.org/ftc/game/cm-html#G305
-After INIT, the robot must stay like this until the match begins | What is motionless? | Competition Manual §11, robot setup | https://ftc-resources.firstinspires.org/ftc/game/cm-html#_Toc243582725
-Robot signs must already show the correct one of these | What is the alliance color? | Competition Manual §11, match-start requirements | https://ftc-resources.firstinspires.org/ftc/game/cm-html#_Toc243582725
+After INIT, the robot must stay like this until the match begins | What is motionless? | Competition Manual §11, robot setup | https://ftc-resources.firstinspires.org/ftc/game/cm-html#_Toc244189223
+Robot signs must already show the correct one of these | What is the alliance color? | Competition Manual §11, match-start requirements | https://ftc-resources.firstinspires.org/ftc/game/cm-html#_Toc244189223
 The only team-supplied object left on the field at the start is this | What is the robot? | Competition Manual G303, ROBOTS on the FIELD must come ready to play a MATCH | https://ftc-resources.firstinspires.org/ftc/game/cm-html#G303
 A starting problem that cannot be fixed quickly can take the robot off the field or leave it in this state | What is disabled? | Competition Manual §11, G303 ROBOTS on the FIELD must come ready to play a MATCH | https://ftc-resources.firstinspires.org/ftc/game/cm-html#G303
 Field staff read a completed INIT as the sign that a team is this | What is ready? | Competition Manual §11, G305 | https://ftc-resources.firstinspires.org/ftc/game/cm-html#G305
 
 CATEGORY: Human Player
-Nectar placed in the field must first touch a tile in this zone. | What is the LOADING ZONE? | Competition Manual §11, entering nectar | https://ftc-resources.firstinspires.org/ftc/game/cm-html#_Toc243582725
+Nectar placed in the field must first touch a tile in this zone. | What is the LOADING ZONE? | Competition Manual §11, entering nectar | https://ftc-resources.firstinspires.org/ftc/game/cm-html#_Toc244189223
 A person may not use one of these to put nectar on the field | What is a tool? | Competition Manual §11.4.6, G427 Humans, only enter NECTAR via the LOADING ZONE | https://ftc-resources.firstinspires.org/ftc/game/cm-html#G427
 Blue nectar may be introduced only by drive-team members from this alliance. | What is the blue alliance? | Competition Manual §11.4.6, G427 Humans, only enter NECTAR via the LOADING ZONE | https://ftc-resources.firstinspires.org/ftc/game/cm-html#G427
 Each hive tip, before the one-minute mark, unlocks this many more nectar | What is 1? | Competition Manual §11, G426 Humans may not enter NECTAR onto the FIELD early | https://ftc-resources.firstinspires.org/ftc/game/cm-html#G426
-With one minute left, an alliance may enter all of this that is still off the field | What is its remaining NECTAR? | Competition Manual §11, when nectar may enter | https://ftc-resources.firstinspires.org/ftc/game/cm-html#_Toc243582725
-A hive tip earns permission to enter one nectar, but does not require it to be entered at this time. | What is immediately? | Competition Manual §11, when nectar may enter | https://ftc-resources.firstinspires.org/ftc/game/cm-html#_Toc243582725
-Pollen, or the other alliance's nectar, that leaves the field should be handed to these people | Who is field staff? | Competition Manual §11, entering nectar | https://ftc-resources.firstinspires.org/ftc/game/cm-html#_Toc243582725
+With one minute left, an alliance may enter all of this that is still off the field | What is its remaining NECTAR? | Competition Manual §11, when nectar may enter | https://ftc-resources.firstinspires.org/ftc/game/cm-html#_Toc244189223
+A hive tip earns permission to enter one nectar, but does not require it to be entered at this time. | What is immediately? | Competition Manual §11, when nectar may enter | https://ftc-resources.firstinspires.org/ftc/game/cm-html#_Toc244189223
+Pollen, or the other alliance's nectar, that leaves the field should be handed to these people | Who is field staff? | Competition Manual §11, entering nectar | https://ftc-resources.firstinspires.org/ftc/game/cm-html#_Toc244189223
 Once the match starts, drive team members stay inside this area | What is the ALLIANCE AREA? | Competition Manual §11, G422 | https://ftc-resources.firstinspires.org/ftc/game/cm-html#G422
 A drive coach may not hold these after the match starts | What are the gamepads? | Competition Manual §11, G423 DRIVE COACHES and other teams: hands off the controls | https://ftc-resources.firstinspires.org/ftc/game/cm-html#G423
-Once the match starts, except for safety, a drive team member may not do this to a robot, or to a piece already touching a robot or a tile | What is contact it? | Competition Manual §11, drive team reach | https://ftc-resources.firstinspires.org/ftc/game/cm-html#_Toc243582725
-Shaking the wall by hand so pieces fall out of a flower counts as this | What is disrupting scoring? | Competition Manual §11, drive team reach | https://ftc-resources.firstinspires.org/ftc/game/cm-html#_Toc243582725
+Once the match starts, except for safety, a drive team member may not do this to a robot, or to a piece already touching a robot or a tile | What is contact it? | Competition Manual §11, drive team reach | https://ftc-resources.firstinspires.org/ftc/game/cm-html#_Toc244189223
+Shaking the wall by hand so pieces fall out of a flower counts as this | What is disrupting scoring? | Competition Manual §11, drive team reach | https://ftc-resources.firstinspires.org/ftc/game/cm-html#_Toc244189223
 To help referees verify legal entry timing, drive teams should keep their unused supply of this visible. | What is NECTAR? | Competition Manual §11.4.6, G426 Humans may not enter NECTAR onto the FIELD early | https://ftc-resources.firstinspires.org/ftc/game/cm-html#G426
 Entering one nectar too early is penalized once per nectar, as this | What is a minor foul? | Competition Manual §11, G426 Humans may not enter NECTAR onto the FIELD early | https://ftc-resources.firstinspires.org/ftc/game/cm-html#G426
 A hive tip during AUTO still lets that alliance's drive team enter one of these | What is NECTAR? | Competition Manual G426 | https://game-qa.firstinspires.org/boards/2027/FTC/QA/qa/11
@@ -332,19 +332,19 @@ The nectar a person is placing has to be dropped, because there is no exception 
 A person may throw or roll nectar if they let go before it touches a tile, it hits the loading zone first, and it does not score in a hive or this | What is a flower? | Competition Manual G427 | https://game-qa.firstinspires.org/boards/2027/FTC/QA/qa/7
 
 CATEGORY: Robot Contact
-Preventing the movement of an opponent robot by contact, either direct or transitive, is called this. | What is pinning? | Competition Manual §11, pins | https://ftc-resources.firstinspires.org/ftc/game/cm-html#_Toc243582725
-A pin may not last longer than this | What is 3 seconds? | Competition Manual §11, pins | https://ftc-resources.firstinspires.org/ftc/game/cm-html#_Toc243582725
-A pin count ends once the robots have separated by at least this many feet from each other for more than 3 seconds. | What is 2 feet? | Competition Manual §11, pins | https://ftc-resources.firstinspires.org/ftc/game/cm-html#_Toc243582725
+Preventing the movement of an opponent robot by contact, either direct or transitive, is called this. | What is pinning? | Competition Manual §11, pins | https://ftc-resources.firstinspires.org/ftc/game/cm-html#_Toc244189223
+A pin may not last longer than this | What is 3 seconds? | Competition Manual §11, pins | https://ftc-resources.firstinspires.org/ftc/game/cm-html#_Toc244189223
+A pin count ends once the robots have separated by at least this many feet from each other for more than 3 seconds. | What is 2 feet? | Competition Manual §11, pins | https://ftc-resources.firstinspires.org/ftc/game/cm-html#_Toc244189223
 A pin also ends if either robot moves at least 2 feet from where the pin began and stays there for more than this long | What is 3 seconds? | Competition Manual G421 | https://ftc-resources.firstinspires.org/ftc/game/cm-html#G421
 A PIN count ends immediately when the robot doing the pinning becomes this. | What is pinned? | Competition Manual §11, G421 There is a 3-count on PINS | https://ftc-resources.firstinspires.org/ftc/game/cm-html#G421
-A pin that keeps going draws another major foul for each additional span of this many seconds. | What is 3 seconds? | Competition Manual §11, pins | https://ftc-resources.firstinspires.org/ftc/game/cm-html#_Toc243582725
+A pin that keeps going draws another major foul for each additional span of this many seconds. | What is 3 seconds? | Competition Manual §11, pins | https://ftc-resources.firstinspires.org/ftc/game/cm-html#_Toc244189223
 Robots may not attach to, tangle with, or do this to an opponent | What is tip over? | Competition Manual G420, Do not tip or entangle | https://ftc-resources.firstinspires.org/ftc/game/cm-html#G420
 One ordinary frame-to-frame hit that happens to tip a robot is not automatically called this | What is strategic? | Competition Manual G420, Do not tip or entangle [G420](manual://114) | https://ftc-resources.firstinspires.org/ftc/game/cm-html#G420
 Using a wedge to deliberately overturn an opponent is an example of this defined kind of violation. | What is STRATEGIC? | Competition Manual G420, Do not tip or entangle | https://ftc-resources.firstinspires.org/ftc/game/cm-html#G420
-Damage to an exposed intake or a loose wire during ordinary contact is usually not a violation of the rule against this | What is damage an opponent robot? | Competition Manual §11, opponent robots | https://ftc-resources.firstinspires.org/ftc/game/cm-html#_Toc243582725
+Damage to an exposed intake or a loose wire during ordinary contact is usually not a violation of the rule against this | What is damage an opponent robot? | Competition Manual §11, opponent robots | https://ftc-resources.firstinspires.org/ftc/game/cm-html#_Toc244189223
 Strategic ramming damages an opponent and leaves it unable to drive. Along with a major foul, G419 specifies this card. | What is a red card? | Competition Manual §11, G419 | https://ftc-resources.firstinspires.org/ftc/game/cm-html#G419
 A robot that, because of the contact, can only drive in circles, or only creep, is treated as this | What is unable to drive? | Competition Manual §11, G419 | https://ftc-resources.firstinspires.org/ftc/game/cm-html#G419
-At the conclusion of the match, the Head Referee may elect to do this kind of check on a robot to confirm damage, and remove the violation if the damage cannot be verified. | What is a visual inspection? | Competition Manual §11, opponent robots | https://ftc-resources.firstinspires.org/ftc/game/cm-html#_Toc243582725
+At the conclusion of the match, the Head Referee may elect to do this kind of check on a robot to confirm damage, and remove the violation if the damage cannot be verified. | What is a visual inspection? | Competition Manual §11, opponent robots | https://ftc-resources.firstinspires.org/ftc/game/cm-html#_Toc244189223
 A plate held over an opponent's launcher to block a shot is not, by itself, illegal or against this | What is the spirit of the competition? | Q&A 2 | https://game-qa.firstinspires.org/boards/2027/FTC/QA/qa/2
 
 CATEGORY: Motors and Air
@@ -356,11 +356,11 @@ Relays, electromagnets, and these coil actuators are not allowed | What are sole
 Robots may not use compressors, vacuum pumps, or these powered air cylinders | What are pneumatic actuators? | Competition Manual §12, R801 No Pneumatic Actuators, High-Speed Blowers, or Vacuums | https://ftc-resources.firstinspires.org/ftc/game/cm-html#R801
 
 CATEGORY: Inspection
-Before qualification or playoff matches, a robot must pass this check | What is inspection? | Competition Manual §3.3, Match Eligibility | https://ftc-resources.firstinspires.org/ftc/game/cm-html#_Toc243582683
+Before qualification or playoff matches, a robot must pass this check | What is inspection? | Competition Manual §3.3, Match Eligibility | https://ftc-resources.firstinspires.org/ftc/game/cm-html#_Toc244189181
 Along with the robot and every component intended for matches, teams must bring this driver-control equipment to inspection. | What is the operator console? | Competition Manual §3.3.1, Inspection | https://ftc-resources.firstinspires.org/ftc/game/cm-html#_Ref238627199
 A new mechanism that may affect safety or legality requires this before the robot's next qualification or playoff match. | What is re-inspection? | Competition Manual §3.3.2, Re-Inspection | https://ftc-resources.firstinspires.org/ftc/game/cm-html#I303
 This volunteer has the final say on whether robot construction is legal to play | Who is the Lead Robot Inspector? | Competition Manual §3.3.1, Inspection | https://ftc-resources.firstinspires.org/ftc/game/cm-html#_Ref238627199
-Teams that dodge the build rules on purpose are breaking this agreement | What is the Competition Integrity Contract? | Competition Manual §1.5, Competition Integrity Contract (CIC) | https://ftc-resources.firstinspires.org/ftc/game/cm-html#_Toc243582676
+Teams that dodge the build rules on purpose are breaking this agreement | What is the Competition Integrity Contract? | Competition Manual §1.5, Competition Integrity Contract (CIC) | https://ftc-resources.firstinspires.org/ftc/game/cm-html#_Toc244189174
 Teams are urged to run through this list themselves before the event | What is the Inspection Checklist? | Competition Manual §3.3.1, Inspection | https://ftc-resources.firstinspires.org/ftc/game/cm-html#_Ref238627199
 At inspection, be ready to show the starting size and this other size | What is the maximum mechanical extension? | Competition Manual §12, R105 expansion limit | https://ftc-resources.firstinspires.org/ftc/game/cm-html#R105
 After changing an arm so it can exceed legal dimensions, a team must request this before playing again. | What is re-inspection? | Competition Manual §3.3.2, Re-Inspection | https://ftc-resources.firstinspires.org/ftc/game/cm-html#I303
@@ -377,7 +377,7 @@ The schedule should be out no later than this many minutes before qualification 
 Unless the Event Director specifies or approves otherwise, an adult must check the team in at least this long before qualification matches, and a student must be there too | What is 45 minutes? | Competition Manual §3, I102 | https://ftc-resources.firstinspires.org/ftc/game/cm-html#I102
 Between back-to-back qualification matches, a team gets at least this long after scores post | What is 5 minutes? | Competition Manual §13.4, T406 breaks | https://ftc-resources.firstinspires.org/ftc/game/cm-html#T406
 Teams do not get to call one of these to stop the schedule | What is a timeout? | Competition Manual T406, No team timeouts, but MATCHES have breaks | https://ftc-resources.firstinspires.org/ftc/game/cm-html#T406
-A low battery, a code bug, or a broken mechanism is not a reason for one of these | What is a replay? | Competition Manual §13.2, Match Replays | https://ftc-resources.firstinspires.org/ftc/game/cm-html#_Toc243582742
+A low battery, a code bug, or a broken mechanism is not a reason for one of these | What is a replay? | Competition Manual §13.2, Match Replays | https://ftc-resources.firstinspires.org/ftc/game/cm-html#_Toc244189240
 Widespread wireless trouble hitting robots on both alliances can be this kind of fault | What is an arena fault? | Competition Manual §13 Tournament, Rule T201 | https://ftc-resources.firstinspires.org/ftc/game/cm-html#T201
 
 CATEGORY: Playoffs
@@ -393,35 +393,35 @@ A playoff tie is settled by playing this until there is one winner | What is ano
 In the first playoff round, the higher-ranked alliance is assigned this color | What is red? | Competition Manual §13.7.2, Playoff bracket | https://ftc-resources.firstinspires.org/ftc/game/cm-html#_Toc172868229
 The largest playoff brackets are built from this many alliances | What is 8? | Competition Manual §13.7.2, Table 13-2 | https://ftc-resources.firstinspires.org/ftc/game/cm-html#_Toc172868229
 The smallest playoff is two alliances playing each other in this | What are the finals? | Competition Manual §13.7.3, 2-ALLIANCE Bracket and Typical Timing | https://ftc-resources.firstinspires.org/ftc/game/cm-html#_Toc205155359
-In playoffs, a disqualification applies to the whole alliance, and that alliance scores this many match points | What is 0? | Competition Manual §13.7, playoff disqualification | https://ftc-resources.firstinspires.org/ftc/game/cm-html#_Toc243582747
-Playoff ranking points are not awarded; alliances advance by doing this | What is winning matches? | Competition Manual §13.7, Playoff matches | https://ftc-resources.firstinspires.org/ftc/game/cm-html#_Toc243582747
+In playoffs, a disqualification applies to the whole alliance, and that alliance scores this many match points | What is 0? | Competition Manual §13.7, playoff disqualification | https://ftc-resources.firstinspires.org/ftc/game/cm-html#_Toc244189245
+Playoff ranking points are not awarded; alliances advance by doing this | What is winning matches? | Competition Manual §13.7, Playoff matches | https://ftc-resources.firstinspires.org/ftc/game/cm-html#_Toc244189245
 
 CATEGORY: Getting There
-A team can earn advancement only from events in this assigned area | What is its home region? | Competition Manual §4, Advancement | https://ftc-resources.firstinspires.org/ftc/game/cm-html#_Toc243582684
-Advancement is counted from a team's first this many qualifying or league tournaments | What is 3? | Competition Manual §4, Advancement | https://ftc-resources.firstinspires.org/ftc/game/cm-html#_Toc243582684
-A team may join only this many leagues in a season | What is 1? | Competition Manual §14, League Play | https://ftc-resources.firstinspires.org/ftc/game/cm-html#_Toc243582749
-League meet events play qualification matches, and they do not include playoffs or this | What is judging? | Competition Manual §14, League Play | https://ftc-resources.firstinspires.org/ftc/game/cm-html#_Toc243582749
-A league should give every team at least this many meet matches | What is 10? | Competition Manual §14, League Play | https://ftc-resources.firstinspires.org/ftc/game/cm-html#_Toc243582749
-League tournament ranking uses the matches at the tournament plus each team's best this many meet matches | What is 10? | Competition Manual §14, League Play | https://ftc-resources.firstinspires.org/ftc/game/cm-html#_Toc243582749
+A team can earn advancement only from events in this assigned area | What is its home region? | Competition Manual §4, Advancement | https://ftc-resources.firstinspires.org/ftc/game/cm-html#_Toc244189182
+Advancement is counted from a team's first this many qualifying or league tournaments | What is 3? | Competition Manual §4, Advancement | https://ftc-resources.firstinspires.org/ftc/game/cm-html#_Toc244189182
+A team may join only this many leagues in a season | What is 1? | Competition Manual §14, League Play | https://ftc-resources.firstinspires.org/ftc/game/cm-html#_Toc244189247
+League meet events play qualification matches, and they do not include playoffs or this | What is judging? | Competition Manual §14, League Play | https://ftc-resources.firstinspires.org/ftc/game/cm-html#_Toc244189247
+A league should give every team at least this many meet matches | What is 10? | Competition Manual §14, League Play | https://ftc-resources.firstinspires.org/ftc/game/cm-html#_Toc244189247
+League tournament ranking uses the matches at the tournament plus each team's best this many meet matches | What is 10? | Competition Manual §14, League Play | https://ftc-resources.firstinspires.org/ftc/game/cm-html#_Toc244189247
 Verbal warnings and cards from a league meet do not do this into the next meet | What is carry over? | Competition Manual §10.6.1, YELLOW and RED CARDS | https://ftc-resources.firstinspires.org/ftc/game/cm-html#_Toc205155318
-Winning the event playoffs is worth this many advancement points | What is 40? | Competition Manual §4.1, Table 4-1 | https://ftc-resources.firstinspires.org/ftc/game/cm-html#_Toc243582685
-Finishing as finalists is worth this many advancement points | What is 20? | Competition Manual §4.1, Table 4-1 | https://ftc-resources.firstinspires.org/ftc/game/cm-html#_Toc243582685
-First place Inspire is worth this many advancement points | What is 60? | Competition Manual §4.1, Table 4-1 | https://ftc-resources.firstinspires.org/ftc/game/cm-html#_Toc243582685
-Second place Inspire is worth this many advancement points | What is 30? | Competition Manual §4.1, Table 4-1 | https://ftc-resources.firstinspires.org/ftc/game/cm-html#_Toc243582685
-First place in a non-Inspire, points-eligible team judged award earns this many advancement points. | What is 12? | Competition Manual §4.1, Table 4-1 | https://ftc-resources.firstinspires.org/ftc/game/cm-html#_Toc243582685
-The lead of Alliance 3 earns this many advancement points for alliance selection. | What is 18? | Competition Manual §4.1, Table 4-1 | https://ftc-resources.firstinspires.org/ftc/game/cm-html#_Toc243582685
+Winning the event playoffs is worth this many advancement points | What is 40? | Competition Manual §4.1, Table 4-1 | https://ftc-resources.firstinspires.org/ftc/game/cm-html#_Toc244189183
+Finishing as finalists is worth this many advancement points | What is 20? | Competition Manual §4.1, Table 4-1 | https://ftc-resources.firstinspires.org/ftc/game/cm-html#_Toc244189183
+First place Inspire is worth this many advancement points | What is 60? | Competition Manual §4.1, Table 4-1 | https://ftc-resources.firstinspires.org/ftc/game/cm-html#_Toc244189183
+Second place Inspire is worth this many advancement points | What is 30? | Competition Manual §4.1, Table 4-1 | https://ftc-resources.firstinspires.org/ftc/game/cm-html#_Toc244189183
+First place in a non-Inspire, points-eligible team judged award earns this many advancement points. | What is 12? | Competition Manual §4.1, Table 4-1 | https://ftc-resources.firstinspires.org/ftc/game/cm-html#_Toc244189183
+The lead of Alliance 3 earns this many advancement points for alliance selection. | What is 18? | Competition Manual §4.1, Table 4-1 | https://ftc-resources.firstinspires.org/ftc/game/cm-html#_Toc244189183
 Qualification performance is worth from 2 advancement points up to this many | What is 16? | Competition Manual §4.1.1, Qualification Phase Performance | https://ftc-resources.firstinspires.org/ftc/game/cm-html#_Ref206695388
 
 
 CATEGORY: Manual and Q&A
-The official written rules for the season live in this document | What is the Competition Manual? | Competition Manual §1.7, Using the Competition Manual | https://ftc-resources.firstinspires.org/ftc/game/cm-html#_Toc243582678
+The official written rules for the season live in this document | What is the Competition Manual? | Competition Manual §1.7, Using the Competition Manual | https://ftc-resources.firstinspires.org/ftc/game/cm-html#_Toc244189176
 Revisions and season news are posted in these Thursday notes | What are Team Updates? | Competition Manual §1.7.3, Team Updates | https://ftc-resources.firstinspires.org/ftc/game/cm-html#_Ref236156861
 Team Updates run every Thursday from Kickoff until two weeks before this event | What is the FIRST Championship? | Competition Manual §1.7.3, Team Updates | https://ftc-resources.firstinspires.org/ftc/game/cm-html#_Ref236156861
 In a Team Update, new text is highlighted, and removed text is shown with this | What is a strikethrough? | Competition Manual §1.7.3, Team Updates | https://ftc-resources.firstinspires.org/ftc/game/cm-html#_Ref236156861
-Teams ask about rules in this online system, which opened at noon Eastern on September 28, 2026 | What is the Q&A? | Competition Manual §1.7.4, Question and Answer System | https://ftc-resources.firstinspires.org/ftc/game/cm-html#_Toc243582678
-Q&A answers are posted from Monday until this time on Thursday | What is 5:00 p.m. Eastern? | Competition Manual §1.7.4, Question and Answer System | https://ftc-resources.firstinspires.org/ftc/game/cm-html#_Toc243582678
-A Q&A answer can help explain a rule, but it does not override this | What is the Competition Manual? | Competition Manual §1.7.4, Question and Answer System | https://ftc-resources.firstinspires.org/ftc/game/cm-html#_Toc243582678
-The official Q&A will not overturn referee rulings made at one of these earlier competitions. | What is a past event? | Competition Manual §1.7.4, Question and Answer System | https://ftc-resources.firstinspires.org/ftc/game/cm-html#_Toc243582678
-Words in all capitals, such as POLLEN or MATCH, are defined in this part of the manual | What is the glossary? | Competition Manual §16, Glossary | https://ftc-resources.firstinspires.org/ftc/game/cm-html#_Toc243582756
+Teams ask about rules in this online system, which opened at noon Eastern on September 28, 2026 | What is the Q&A? | Competition Manual §1.7.4, Question and Answer System | https://ftc-resources.firstinspires.org/ftc/game/cm-html#_Toc244189176
+Q&A answers are posted from Monday until this time on Thursday | What is 5:00 p.m. Eastern? | Competition Manual §1.7.4, Question and Answer System | https://ftc-resources.firstinspires.org/ftc/game/cm-html#_Toc244189176
+A Q&A answer can help explain a rule, but it does not override this | What is the Competition Manual? | Competition Manual §1.7.4, Question and Answer System | https://ftc-resources.firstinspires.org/ftc/game/cm-html#_Toc244189176
+The official Q&A will not overturn referee rulings made at one of these earlier competitions. | What is a past event? | Competition Manual §1.7.4, Question and Answer System | https://ftc-resources.firstinspires.org/ftc/game/cm-html#_Toc244189176
+Words in all capitals, such as POLLEN or MATCH, are defined in this part of the manual | What is the glossary? | Competition Manual §16, Glossary | https://ftc-resources.firstinspires.org/ftc/game/cm-html#_Toc244189254
 
 `;
